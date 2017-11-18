@@ -2,15 +2,15 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-entity barrelShifter is
+entity numShifter is
 	PORT(
 		mantissaIn : in std_logic_vector(47 downto 0);
 		numShifts : in std_logic_vector(5 downto 0);
 		mantissaShifted : out std_logic_vector(47 downto 0)
 	);
-end barrelShifter;
+end numShifter;
 
-architecture behave of barrelShifter is
+architecture behave of numShifter is
 type shifterArrayType is array(5 downto 0) of std_logic_vector(47 downto 0);
 signal shifterArray : shifterArrayType;
 begin
