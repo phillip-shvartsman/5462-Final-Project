@@ -4,30 +4,20 @@ use ieee.numeric_std.all;
 
 entity exponentIncrementor is
 	PORT(
-		exponentIn : in std_logic_vector(9 downto 0);
-		exponentAdded : out std_logic_vector(9 downto 0)
+		a : in std_logic_vector(9 downto 0);
+		c : out std_logic_vector(9 downto 0)
 	);
 end exponentIncrementor;
 
 architecture behave of exponentIncrementor is
-signal additionCarry : std_logic_vector(9 downto 0);
+signal carry : std_logic_vector(10 downto 0);
+signal b : std_logic_vector(9 downto 0) := "0000000001";
 begin
+	carry(0) <= '0';
 	generateAddition:
 	for i in 0 to 9 generate
-		addingZero: 
-		if i>1 generate
-			exponentAdded(i) <= exponentIn(i) xor '0' xor additionCarry(i-1);
-			additionCarry(i) <= (exponentIn(i) and additionCarry(i-1)) or ('0' and additionCarry(i-1)) or (exponentIn(i) and '0');	
-		end generate addingZero;
-		addingOne:
-		if i=1 generate
-			exponentAdded(i) <= exponentIn(i) xor '1' xor additionCarry(i-1);
-			additionCarry(i) <= (exponentIn(i) and additionCarry(i-1)) or ('1' and additionCarry(i-1)) or (exponentIn(i) and '1');	
-		end generate addingOne;
-		lsb:
-		if i=0 generate
-			exponentAdded(i) <= exponentIn(i);
-			additionCarry(i) <= '0';
-		end generate lsb;
+		c(i) <= a(i) xor b(i) xor carry(i);
+		--carry(i+1) <= a(i) and b(i) or(carry(i) and (a(i) xor b(i)));
+		carry(i+1) <= (a(i) and b(i)) or (carry(i) and(a(i) xor b(i)));
 	end generate generateAddition;
 end behave;
