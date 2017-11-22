@@ -59,6 +59,6 @@ begin
 		shifterArray(5) when '0',
 		(others=>'Z') when others;
 
-	mantissaOut <= '0' & mantissaShifted(46 downto 0);
+	mantissaOut <= '0' & mantissaShifted(47 downto 1);
 
 end behave;

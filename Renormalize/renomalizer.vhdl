@@ -37,8 +37,8 @@ component exponentSubtractor is
 end component;
 component exponentIncrementor is
 	PORT(
-		exponentIn : in std_logic_vector(9 downto 0);
-		exponentAdded : out std_logic_vector(9 downto 0)
+		a : in std_logic_vector(9 downto 0);
+		c : out std_logic_vector(9 downto 0)
 	);
 end component;
 component underFlowUnit is
@@ -95,6 +95,12 @@ for all :exponentIncrementor use ENTITY work.exponentIncrementor(behave);
 
 --Decide Overflow or Underflow Signals
 	signal exponentStepHead : std_logic_vector(1 downto 0);
+
+--Check if you passing through a denormalizer number
+	signal checkDenorm : std_logic;
+	signal exponentStepHeadPlusDenorm : std_logic_vector(3 downto 0);
+--Check if your passing inf
+	signal checkInf : std_logic;
 begin
 --Overflow Underflow Calculation
 	underFlowOverFlow(0) <= exponentIn(7);
@@ -149,16 +155,21 @@ begin
 --11 | 10 represents underflow
 --01 represents overflow
 --00 represents just right, aka just passthrough the mantissa step without any correction.
+--If exponentStep is a Denorm
+	checkInf <= exponentStep(0) and exponentStep(1) and exponentStep(2)and exponentStep(3) and exponentStep(4) and exponentStep(5) and exponentStep(6) and exponentStep(7);
+	checkDenorm <= not(exponentStep(0)) and not(exponentStep(1)) and not(exponentStep(2)) and not(exponentStep(3)) and not(exponentStep(4)) and not(exponentStep(5)) and not(exponentStep(6)) and not(exponentStep(7)) and not(exponentStep(8)) and not(exponentStep(9));
 	exponentStepHead <= exponentStep(9 downto 8);
+	exponentStepHeadPlusDenorm <= exponentStep(9 downto 8) & checkDenorm & checkInf;
 	with exponentStepHead select exponentRenorm <=
 		exponentUnderflow when "11" | "10",
 		exponentOverflow when "01",
 		exponentStep when "00",
 		(others => 'Z') when others;
-	with exponentStepHead select mantissaRenorm <= 
-		mantissaCorrectForDenorm when "11" | "10",
-		mantissaOverflow when "01",
-		mantissaStep when "00",
+	with exponentStepHeadPlusDenorm select mantissaRenorm <= 
+		mantissaCorrectForDenorm when "1100" | "1000" | "1101",
+		mantissaOverflow when "0100" | "0001",
+		mantissaStep when "0000",
+		'0' & mantissaStep(47 downto 1) when "0010",
 		(others => 'Z') when others;
 		
 --Enable Bit
