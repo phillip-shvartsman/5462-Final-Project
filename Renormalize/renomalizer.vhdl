@@ -52,7 +52,7 @@ for all : underFlowUnit use ENTITY work.underFlowUnit(behave);
 for all : shiftCalculator use ENTITY work.shiftCalculator(behave);
 for all : numShifter use ENTITY work.numShifter(behave);
 for all : exponentSubtractor use ENTITY work.exponentSubtractor(behave);
-for all :exponentIncrementor use ENTITY work.exponentIncrementor(behave);
+for all : exponentIncrementor use ENTITY work.exponentIncrementor(behave);
 
 --Convert aHigh and bHigh to overflow/underflow
 	signal underFlowOverFlow : std_logic_vector(2 downto 0);
