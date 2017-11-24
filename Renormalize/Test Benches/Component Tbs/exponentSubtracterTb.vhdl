@@ -18,11 +18,13 @@ signal a : std_logic_vector(9 downto 0);
 signal b : std_logic_vector(5 downto 0);
 signal z : std_logic_vector(9 downto 0);
 signal zexpected : integer;
+signal correct : boolean;
 begin
 aint <= to_integer(unsigned(a));
 bint <= to_integer(unsigned(b));
 zint <= to_integer(unsigned(z));
-zexpected <= to_integer(unsigned(a))-to_integer(unsigned(b));
+zexpected <= to_integer(signed(a))-to_integer(signed(b));
+correct <= zexpected = zint;
 uut: exponentSubtractor port map(a,b,z);
 applyTests: process
 	begin
