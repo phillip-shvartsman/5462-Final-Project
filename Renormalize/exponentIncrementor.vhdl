@@ -14,6 +14,9 @@ signal carry : std_logic_vector(9 downto 0);
 signal b : std_logic_vector(9 downto 0) := "0000000001";
 signal presumeZero,presumeOne,presumeOneCarry, presumeZeroCarry : std_logic_vector(9 downto 0);
 begin
+
+
+	
 	generatePresumeZero:
 	for i in 0 to 9 generate
 		presumeZero(i) <= a(i) xor b(i) xor '0';

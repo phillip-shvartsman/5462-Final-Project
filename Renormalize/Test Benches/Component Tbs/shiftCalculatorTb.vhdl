@@ -22,6 +22,8 @@ begin
 uut: shiftCalculator port map(VectorUnderTest,shiftsOut);
 applyTests: process
 begin
+VectorUnderTest <= (others=>'0');
+wait for 20 ns;
 for i in 0 to 47 loop
 	VectorUnderTest <= (others=>'0');
 	VectorUnderTest(i) <= '1';
