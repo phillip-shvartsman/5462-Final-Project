@@ -1,0 +1,95 @@
+----------------
+; Command Info ;
+----------------
+Report Path: Found 1 paths. Longest delay is 21.381 
+
+Tcl Command:
+    report_path -multi_corner -file C:/Users/user/Desktop/Report_Path_Renormalizer -panel_name {Report Path} -from [get_cells {aHigh~input bHigh~input enableIn~input exponentIn[0]~input exponentIn[1]~input exponentIn[2]~input exponentIn[3]~input exponentIn[4]~input exponentIn[5]~input exponentIn[6]~input exponentIn[7]~input mantissaIn[0]~input mantissaIn[1]~input mantissaIn[2]~input mantissaIn[3]~input mantissaIn[4]~input mantissaIn[5]~input mantissaIn[6]~input mantissaIn[7]~input mantissaIn[8]~input mantissaIn[9]~input mantissaIn[10]~input mantissaIn[11]~input mantissaIn[12]~input mantissaIn[13]~input mantissaIn[14]~input mantissaIn[15]~input mantissaIn[16]~input mantissaIn[17]~input mantissaIn[18]~input mantissaIn[19]~input mantissaIn[20]~input mantissaIn[21]~input mantissaIn[22]~input mantissaIn[23]~input mantissaIn[24]~input mantissaIn[25]~input mantissaIn[26]~input mantissaIn[27]~input mantissaIn[28]~input mantissaIn[29]~input mantissaIn[30]~input mantissaIn[31]~input mantissaIn[32]~input mantissaIn[33]~input mantissaIn[34]~input mantissaIn[35]~input mantissaIn[36]~input mantissaIn[37]~input mantissaIn[38]~input mantissaIn[39]~input mantissaIn[40]~input mantissaIn[41]~input mantissaIn[42]~input mantissaIn[43]~input mantissaIn[44]~input mantissaIn[45]~input mantissaIn[46]~input mantissaIn[47]~input signIn~input}] -to [get_cells {zOut[0]~output zOut[1]~output zOut[2]~output zOut[3]~output zOut[4]~output zOut[5]~output zOut[6]~output zOut[7]~output zOut[8]~output zOut[9]~output zOut[10]~output zOut[11]~output zOut[12]~output zOut[13]~output zOut[14]~output zOut[15]~output zOut[16]~output zOut[17]~output zOut[18]~output zOut[19]~output zOut[20]~output zOut[21]~output zOut[22]~output zOut[23]~output zOut[24]~output zOut[25]~output zOut[26]~output zOut[27]~output zOut[28]~output zOut[29]~output zOut[30]~output zOut[31]~output}] -npaths 1
+
+Options:
+    -from [get_cells {aHigh~input bHigh~input enableIn~input exponentIn[0]~input exponentIn[1]~input exponentIn[2]~input exponentIn[3]~input exponentIn[4]~input exponentIn[5]~input exponentIn[6]~input exponentIn[7]~input mantissaIn[0]~input mantissaIn[1]~input mantissaIn[2]~input mantissaIn[3]~input mantissaIn[4]~input mantissaIn[5]~input mantissaIn[6]~input mantissaIn[7]~input mantissaIn[8]~input mantissaIn[9]~input mantissaIn[10]~input mantissaIn[11]~input mantissaIn[12]~input mantissaIn[13]~input mantissaIn[14]~input mantissaIn[15]~input mantissaIn[16]~input mantissaIn[17]~input mantissaIn[18]~input mantissaIn[19]~input mantissaIn[20]~input mantissaIn[21]~input mantissaIn[22]~input mantissaIn[23]~input mantissaIn[24]~input mantissaIn[25]~input mantissaIn[26]~input mantissaIn[27]~input mantissaIn[28]~input mantissaIn[29]~input mantissaIn[30]~input mantissaIn[31]~input mantissaIn[32]~input mantissaIn[33]~input mantissaIn[34]~input mantissaIn[35]~input mantissaIn[36]~input mantissaIn[37]~input mantissaIn[38]~input mantissaIn[39]~input mantissaIn[40]~input mantissaIn[41]~input mantissaIn[42]~input mantissaIn[43]~input mantissaIn[44]~input mantissaIn[45]~input mantissaIn[46]~input mantissaIn[47]~input signIn~input}] 
+    -to [get_cells {zOut[0]~output zOut[1]~output zOut[2]~output zOut[3]~output zOut[4]~output zOut[5]~output zOut[6]~output zOut[7]~output zOut[8]~output zOut[9]~output zOut[10]~output zOut[11]~output zOut[12]~output zOut[13]~output zOut[14]~output zOut[15]~output zOut[16]~output zOut[17]~output zOut[18]~output zOut[19]~output zOut[20]~output zOut[21]~output zOut[22]~output zOut[23]~output zOut[24]~output zOut[25]~output zOut[26]~output zOut[27]~output zOut[28]~output zOut[29]~output zOut[30]~output zOut[31]~output}] 
+    -npaths 1 
+    -multi_corner 
+    -panel_name "Report Path" 
+    -file_name "C:/Users/user/Desktop/Report_Path_Renormalizer" 
+
+Delay Model:
+    Slow 1100mV 85C Model
+
++-----------------------------------------------------+
+; Summary of Paths                                    ;
++--------+------------------------+-------------------+
+; Delay  ; From Node              ; To Node           ;
++--------+------------------------+-------------------+
+; 21.381 ; mantissaIn[43]~input|o ; zOut[12]~output|i ;
++--------+------------------------+-------------------+
+
+Path #1: Delay is 21.381
+===============================================================================
++------------------------------------+
+; Path Summary                       ;
++-----------+------------------------+
+; Property  ; Value                  ;
++-----------+------------------------+
+; From Node ; mantissaIn[43]~input|o ;
+; To Node   ; zOut[12]~output|i      ;
+; Delay     ; 21.381                 ;
++-----------+------------------------+
+
++------------------------------------------------------------------------------------+
+; Statistics                                                                         ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+; Property               ; Value  ; Count ; Total Delay ; % of Total ; Min   ; Max   ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+; Data Delay             ; 21.381 ;       ;             ;            ;       ;       ;
+; Number of Logic Levels ;        ; 16    ;             ;            ;       ;       ;
+; Physical Delays        ;        ;       ;             ;            ;       ;       ;
+;  IC                    ;        ; 17    ; 15.374      ; 72         ; 0.339 ; 2.683 ;
+;  Cell                  ;        ; 16    ; 6.007       ; 28         ; 0.072 ; 0.491 ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+Note: Negative delays are omitted from totals when calculating percentages
+
++--------------------------------------------------------------------------------------------------------------+
+; Data Arrival Path                                                                                            ;
++----------+---------+----+------+--------+---------------------+----------------------------------------------+
+; Total    ; Incr    ; RF ; Type ; Fanout ; Location            ; Element                                      ;
++----------+---------+----+------+--------+---------------------+----------------------------------------------+
+; 21.381   ; 21.381  ;    ;      ;        ;                     ; data path                                    ;
+;   0.000  ;   0.000 ;    ;      ; 10     ; IOIBUF_X14_Y0_N35   ; mantissaIn[43]~input|o                       ;
+;   1.836  ;   1.836 ; RR ; IC   ; 1      ; LABCELL_X21_Y2_N33  ; shiftCalculatorUnit|shiftsOut[2]~0|datad     ;
+;   2.144  ;   0.308 ; RF ; CELL ; 3      ; LABCELL_X21_Y2_N33  ; shiftCalculatorUnit|shiftsOut[2]~0|combout   ;
+;   2.864  ;   0.720 ; FF ; IC   ; 1      ; LABCELL_X18_Y2_N36  ; shiftCalculatorUnit|oneHot2[35]~0|datad      ;
+;   3.300  ;   0.436 ; FF ; CELL ; 3      ; LABCELL_X18_Y2_N36  ; shiftCalculatorUnit|oneHot2[35]~0|combout    ;
+;   4.009  ;   0.709 ; FF ; IC   ; 1      ; LABCELL_X18_Y3_N0   ; shiftCalculatorUnit|shiftsOut[4]~2|datad     ;
+;   4.445  ;   0.436 ; FF ; CELL ; 5      ; LABCELL_X18_Y3_N0   ; shiftCalculatorUnit|shiftsOut[4]~2|combout   ;
+;   5.275  ;   0.830 ; FF ; IC   ; 1      ; MLABCELL_X19_Y1_N6  ; shiftCalculatorUnit|oneHot1[25]|datac        ;
+;   5.693  ;   0.418 ; FF ; CELL ; 5      ; MLABCELL_X19_Y1_N6  ; shiftCalculatorUnit|oneHot1[25]|combout      ;
+;   6.196  ;   0.503 ; FF ; IC   ; 1      ; LABCELL_X18_Y1_N6   ; shiftCalculatorUnit|oneHot2[18]~2|dataf      ;
+;   6.271  ;   0.075 ; FF ; CELL ; 5      ; LABCELL_X18_Y1_N6   ; shiftCalculatorUnit|oneHot2[18]~2|combout    ;
+;   6.610  ;   0.339 ; FF ; IC   ; 1      ; LABCELL_X17_Y1_N30  ; shiftCalculatorUnit|oneHot2[11]~3|dataa      ;
+;   7.090  ;   0.480 ; FF ; CELL ; 5      ; LABCELL_X17_Y1_N30  ; shiftCalculatorUnit|oneHot2[11]~3|combout    ;
+;   7.888  ;   0.798 ; FF ; IC   ; 1      ; MLABCELL_X14_Y1_N6  ; shiftCalculatorUnit|oneHot2[6]~4|dataf       ;
+;   7.960  ;   0.072 ; FF ; CELL ; 5      ; MLABCELL_X14_Y1_N6  ; shiftCalculatorUnit|oneHot2[6]~4|combout     ;
+;   8.354  ;   0.394 ; FF ; IC   ; 1      ; LABCELL_X13_Y1_N0   ; shiftCalculatorUnit|orLayerLSB[11]~0|datac   ;
+;   8.794  ;   0.440 ; FF ; CELL ; 5      ; LABCELL_X13_Y1_N0   ; shiftCalculatorUnit|orLayerLSB[11]~0|combout ;
+;   9.500  ;   0.706 ; FF ; IC   ; 1      ; LABCELL_X15_Y1_N18  ; shiftCalculatorUnit|shiftsOut[1]~26|dataa    ;
+;   9.987  ;   0.487 ; FR ; CELL ; 51     ; LABCELL_X15_Y1_N18  ; shiftCalculatorUnit|shiftsOut[1]~26|combout  ;
+;   10.661 ;   0.674 ; RR ; IC   ; 1      ; MLABCELL_X19_Y1_N30 ; leftShifterUnit|Selector224~0|datab          ;
+;   11.152 ;   0.491 ; RF ; CELL ; 4      ; MLABCELL_X19_Y1_N30 ; leftShifterUnit|Selector224~0|combout        ;
+;   12.082 ;   0.930 ; FF ; IC   ; 1      ; LABCELL_X15_Y3_N48  ; leftShifterUnit|Selector126~0|datad          ;
+;   12.518 ;   0.436 ; FF ; CELL ; 2      ; LABCELL_X15_Y3_N48  ; leftShifterUnit|Selector126~0|combout        ;
+;   13.727 ;   1.209 ; FF ; IC   ; 1      ; LABCELL_X22_Y2_N3   ; Mux6~4|datab                                 ;
+;   14.180 ;   0.453 ; FF ; CELL ; 1      ; LABCELL_X22_Y2_N3   ; Mux6~4|combout                               ;
+;   15.250 ;   1.070 ; FF ; IC   ; 1      ; MLABCELL_X19_Y4_N48 ; Mux6~5|datad                                 ;
+;   15.551 ;   0.301 ; FR ; CELL ; 6      ; MLABCELL_X19_Y4_N48 ; Mux6~5|combout                               ;
+;   16.275 ;   0.724 ; RR ; IC   ; 1      ; LABCELL_X22_Y4_N0   ; underFlowUnitUnit|Selector279~0|datac        ;
+;   16.698 ;   0.423 ; RF ; CELL ; 5      ; LABCELL_X22_Y4_N0   ; underFlowUnitUnit|Selector279~0|combout      ;
+;   17.392 ;   0.694 ; FF ; IC   ; 1      ; MLABCELL_X25_Y4_N3  ; Selector14~0|datad                           ;
+;   17.707 ;   0.315 ; FF ; CELL ; 1      ; MLABCELL_X25_Y4_N3  ; Selector14~0|combout                         ;
+;   18.262 ;   0.555 ; FF ; IC   ; 1      ; LABCELL_X23_Y4_N30  ; Selector14~2|datad                           ;
+;   18.698 ;   0.436 ; FF ; CELL ; 1      ; LABCELL_X23_Y4_N30  ; Selector14~2|combout                         ;
+;   21.381 ;   2.683 ; FF ; IC   ; 1      ; IOOBUF_X44_Y0_N2    ; zOut[12]~output|i                            ;
++----------+---------+----+------+--------+---------------------+----------------------------------------------+
+
+

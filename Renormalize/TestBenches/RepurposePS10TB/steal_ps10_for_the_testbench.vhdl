@@ -1,9 +1,9 @@
 -- YOU MUST run >qvmap  /rcc4/faculty/degroat/ee762_assign/assign
 -- BEFORE TRYING TO COMPILE THIS TESTBENCH
 
-library ieee, assign;
+library ieee, work;
 use ieee.std_logic_1164.all;
-use ASSIGN.fpm_test_vect.all;
+use WORK.fpm_test_vect.all;
 use STD.TEXTIO.all;
 use WORK.package_ps6.ALL;
 USE ieee.numeric_std.ALL;
@@ -186,7 +186,7 @@ architecture behavioral of stealfpm IS
 end behavioral;
 --use ASSIGN.fpm_test_vect.all;
 
-library ieee, assign;
+library ieee, work;
 use ieee.std_logic_1164.all;
 use work.fpm_test_vect.all;
 use STD.TEXTIO.all;
