@@ -24,7 +24,7 @@ procedure gen_vec (SIGNAL aid_sig,bid_sig,resid_sig : OUT string (1 to 6);
                SIGNAL err_sig : OUT bit;
                SIGNAL score : OUT integer) is
 variable cur_line : LINE;
-file test_data: TEXT OPEN read_mode IS "C:\Users\user\Documents\GitHub\5462-Final-Project\Renormalize\Test Benches\RepurposePS10TB\fpmvectors";
+file test_data: TEXT OPEN read_mode IS "C:\Users\user\Documents\GitHub\5462-Final-Project\Renormalize\TestBenches\RepurposePS10TB\fpmvectors";
 variable a_test_val, b_test_val : bit_vector (31 downto 0);
 variable result_val : bit_vector (31 downto 0);
 variable std_result_val : std_logic_vector (31 downto 0);
