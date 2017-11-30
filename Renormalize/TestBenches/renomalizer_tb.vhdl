@@ -5,7 +5,7 @@ architecture behave of renormalizer_tb is
 begin
   signal
   
-    signal A,B,C : std_logic_vector (31 downto 0);
+  signal A,B,C : std_logic_vector (31 downto 0);
   signal exp_res : std_logic_vector (31 downto 0);
   signal latch,drive : std_ulogic := '0';
   signal aid_sig, bid_sig, resid_sig : string(1 to 6) := "======";
