@@ -1,6 +1,18 @@
+-------------------------------------------------------------------------------
+--  Test Bench Entity for the Renormalization
+-------------------------------------------------------------------------------
 entity renormalizer_tb is
 end renormalizer_tb;
 
+-------------------------------------------------------------------------------
+--  Architecture for the Renormalization Test Bench
+-------------------------------------------------------------------------------
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use STD.TEXTIO.all;
+USE work.renorm_test_vect.all;	
+	
 architecture behavioral of renormalizer_tb is
 begin
   signal
@@ -24,12 +36,18 @@ component renormalizer
 	);
 end renormalizer;
 FOR ALL : renormalizer_tb use ENTITY work.renormalizer_tb(behavioral);
+end behavioral;
 
+	
+
+-------------------------------------------------------------------------------
+--  How the Package Test_Vect works
+-------------------------------------------------------------------------------	
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use STD.TEXTIO.all;
-package fpm_test_vect is
+package renorm_test_vect is
 
 constant HIGHZ : std_logic_vector (31 downto 0)
            := "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ";
@@ -41,9 +59,9 @@ procedure gen_vec (SIGNAL aid_sig,bid_sig,resid_sig : OUT string (1 to 6);
                SIGNAL err_sig : OUT bit;
                SIGNAL score : OUT integer);
 
-end fpm_test_vect;
+end renorm_test_vect;
 
-package body fpm_test_vect is
+package body renorm_test_vect is
 
 procedure gen_vec (SIGNAL aid_sig,bid_sig,resid_sig : OUT string (1 to 6);
                SIGNAL aval,bval,exp_res : OUT std_logic_vector (31 downto 0);
@@ -95,7 +113,5 @@ Begin
   wait for 100 ns;
   wait;
 END gen_vec;
-
-end fpm_test_vect;	
+end renorm_test_vect;	
 	
-end behavioral;
