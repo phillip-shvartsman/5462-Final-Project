@@ -1,0 +1,69 @@
+----------------
+; Command Info ;
+----------------
+Report Path: Found 1 paths. Longest delay is 13.992 
+
+Tcl Command:
+    report_path -multi_corner -file {C:/Users/user/Documents/GitHub/5462-Final-Project/Prepare/Timing/Prepare Timing.txt} -panel_name {Report Path} -from [get_cells {Ain[0]~input Ain[1]~input Ain[2]~input Ain[3]~input Ain[4]~input Ain[5]~input Ain[6]~input Ain[7]~input Ain[8]~input Ain[9]~input Ain[10]~input Ain[11]~input Ain[12]~input Ain[13]~input Ain[14]~input Ain[15]~input Ain[16]~input Ain[17]~input Ain[18]~input Ain[19]~input Ain[20]~input Ain[21]~input Ain[22]~input Ain[23]~input Ain[24]~input Ain[25]~input Ain[26]~input Ain[27]~input Ain[28]~input Ain[29]~input Ain[30]~input Ain[31]~input Bin[0]~input Bin[1]~input Bin[2]~input Bin[3]~input Bin[4]~input Bin[5]~input Bin[6]~input Bin[7]~input Bin[8]~input Bin[9]~input Bin[10]~input Bin[11]~input Bin[12]~input Bin[13]~input Bin[14]~input Bin[15]~input Bin[16]~input Bin[17]~input Bin[18]~input Bin[19]~input Bin[20]~input Bin[21]~input Bin[22]~input Bin[23]~input Bin[24]~input Bin[25]~input Bin[26]~input Bin[27]~input Bin[28]~input Bin[29]~input Bin[30]~input Bin[31]~input add_sub_mult[0]~input add_sub_mult[1]~input}] -to [get_cells {EN~output expA[0]~output expA[1]~output expA[2]~output expA[3]~output expA[4]~output expA[5]~output expA[6]~output expA[7]~output expB[0]~output expB[1]~output expB[2]~output expB[3]~output expB[4]~output expB[5]~output expB[6]~output expB[7]~output manA[0]~output manA[1]~output manA[2]~output manA[3]~output manA[4]~output manA[5]~output manA[6]~output manA[7]~output manA[8]~output manA[9]~output manA[10]~output manA[11]~output manA[12]~output manA[13]~output manA[14]~output manA[15]~output manA[16]~output manA[17]~output manA[18]~output manA[19]~output manA[20]~output manA[21]~output manA[22]~output manA[23]~output manB[0]~output manB[1]~output manB[2]~output manB[3]~output manB[4]~output manB[5]~output manB[6]~output manB[7]~output manB[8]~output manB[9]~output manB[10]~output manB[11]~output manB[12]~output manB[13]~output manB[14]~output manB[15]~output manB[16]~output manB[17]~output manB[18]~output manB[19]~output manB[20]~output manB[21]~output manB[22]~output manB[23]~output sA~output sB~output}] -npaths 1
+
+Options:
+    -from [get_cells {Ain[0]~input Ain[1]~input Ain[2]~input Ain[3]~input Ain[4]~input Ain[5]~input Ain[6]~input Ain[7]~input Ain[8]~input Ain[9]~input Ain[10]~input Ain[11]~input Ain[12]~input Ain[13]~input Ain[14]~input Ain[15]~input Ain[16]~input Ain[17]~input Ain[18]~input Ain[19]~input Ain[20]~input Ain[21]~input Ain[22]~input Ain[23]~input Ain[24]~input Ain[25]~input Ain[26]~input Ain[27]~input Ain[28]~input Ain[29]~input Ain[30]~input Ain[31]~input Bin[0]~input Bin[1]~input Bin[2]~input Bin[3]~input Bin[4]~input Bin[5]~input Bin[6]~input Bin[7]~input Bin[8]~input Bin[9]~input Bin[10]~input Bin[11]~input Bin[12]~input Bin[13]~input Bin[14]~input Bin[15]~input Bin[16]~input Bin[17]~input Bin[18]~input Bin[19]~input Bin[20]~input Bin[21]~input Bin[22]~input Bin[23]~input Bin[24]~input Bin[25]~input Bin[26]~input Bin[27]~input Bin[28]~input Bin[29]~input Bin[30]~input Bin[31]~input add_sub_mult[0]~input add_sub_mult[1]~input}] 
+    -to [get_cells {EN~output expA[0]~output expA[1]~output expA[2]~output expA[3]~output expA[4]~output expA[5]~output expA[6]~output expA[7]~output expB[0]~output expB[1]~output expB[2]~output expB[3]~output expB[4]~output expB[5]~output expB[6]~output expB[7]~output manA[0]~output manA[1]~output manA[2]~output manA[3]~output manA[4]~output manA[5]~output manA[6]~output manA[7]~output manA[8]~output manA[9]~output manA[10]~output manA[11]~output manA[12]~output manA[13]~output manA[14]~output manA[15]~output manA[16]~output manA[17]~output manA[18]~output manA[19]~output manA[20]~output manA[21]~output manA[22]~output manA[23]~output manB[0]~output manB[1]~output manB[2]~output manB[3]~output manB[4]~output manB[5]~output manB[6]~output manB[7]~output manB[8]~output manB[9]~output manB[10]~output manB[11]~output manB[12]~output manB[13]~output manB[14]~output manB[15]~output manB[16]~output manB[17]~output manB[18]~output manB[19]~output manB[20]~output manB[21]~output manB[22]~output manB[23]~output sA~output sB~output}] 
+    -npaths 1 
+    -multi_corner 
+    -panel_name "Report Path" 
+    -file_name "C:/Users/user/Documents/GitHub/5462-Final-Project/Prepare/Timing/Prepare Timing.txt" 
+
+Delay Model:
+    Slow 1100mV 85C Model
+
++--------------------------------------------+
+; Summary of Paths                           ;
++--------+----------------+------------------+
+; Delay  ; From Node      ; To Node          ;
++--------+----------------+------------------+
+; 13.992 ; Bin[8]~input|o ; expA[3]~output|i ;
++--------+----------------+------------------+
+
+Path #1: Delay is 13.992
+===============================================================================
++------------------------------+
+; Path Summary                 ;
++-----------+------------------+
+; Property  ; Value            ;
++-----------+------------------+
+; From Node ; Bin[8]~input|o   ;
+; To Node   ; expA[3]~output|i ;
+; Delay     ; 13.992           ;
++-----------+------------------+
+
++------------------------------------------------------------------------------------+
+; Statistics                                                                         ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+; Property               ; Value  ; Count ; Total Delay ; % of Total ; Min   ; Max   ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+; Data Delay             ; 13.992 ;       ;             ;            ;       ;       ;
+; Number of Logic Levels ;        ; 3     ;             ;            ;       ;       ;
+; Physical Delays        ;        ;       ;             ;            ;       ;       ;
+;  IC                    ;        ; 4     ; 12.844      ; 92         ; 0.595 ; 7.717 ;
+;  Cell                  ;        ; 3     ; 1.148       ; 8          ; 0.352 ; 0.422 ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+Note: Negative delays are omitted from totals when calculating percentages
+
++---------------------------------------------------------------------------------+
+; Data Arrival Path                                                               ;
++----------+---------+----+------+--------+--------------------+------------------+
+; Total    ; Incr    ; RF ; Type ; Fanout ; Location           ; Element          ;
++----------+---------+----+------+--------+--------------------+------------------+
+; 13.992   ; 13.992  ;    ;      ;        ;                    ; data path        ;
+;   0.000  ;   0.000 ;    ;      ; 3      ; IOIBUF_X74_Y0_N75  ; Bin[8]~input|o   ;
+;   7.717  ;   7.717 ; FF ; IC   ; 1      ; LABCELL_X24_Y1_N6  ; Equal1~3|datac   ;
+;   8.069  ;   0.352 ; FR ; CELL ; 3      ; LABCELL_X24_Y1_N6  ; Equal1~3|combout ;
+;   8.664  ;   0.595 ; RR ; IC   ; 1      ; LABCELL_X29_Y1_N51 ; add_sZ~2|datac   ;
+;   9.038  ;   0.374 ; RR ; CELL ; 12     ; LABCELL_X29_Y1_N51 ; add_sZ~2|combout ;
+;   10.798 ;   1.760 ; RR ; IC   ; 1      ; LABCELL_X57_Y1_N15 ; expA~4|datad     ;
+;   11.220 ;   0.422 ; RF ; CELL ; 1      ; LABCELL_X57_Y1_N15 ; expA~4|combout   ;
+;   13.992 ;   2.772 ; FF ; IC   ; 1      ; IOOBUF_X54_Y0_N2   ; expA[3]~output|i ;
++----------+---------+----+------+--------+--------------------+------------------+
+
+

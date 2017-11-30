@@ -14,12 +14,28 @@ architecture behave of shiftCalculator is
 -----------------------------------------
 signal oneHot1 : std_logic_vector(46 downto 0);
 signal oneHot2 : std_logic_vector(46 downto 0);
+
 signal orLayerLSB : std_logic_vector(11 downto 0);
 signal orLayerBit1 : std_logic_vector(11 downto 0);
 signal orLayerBit2 : std_logic_vector(11 downto 0);
 signal orLayerBit3 : std_logic_vector(11 downto 0);
 signal orLayerBit4 : std_logic_vector(7 downto 0);
 signal orLayerBit5 : std_logic_vector(7 downto 0);
+
+signal orLayer2LSB : std_logic_vector(5 downto 0);
+signal orLayer2Bit1 : std_logic_vector(5 downto 0);
+signal orLayer2Bit2 : std_logic_vector(5 downto 0);
+signal orLayer2Bit3 : std_logic_vector(5 downto 0);
+signal orLayer2Bit4 : std_logic_vector(3 downto 0);
+signal orLayer2Bit5 : std_logic_vector(3 downto 0);
+
+signal orLayer3LSB : std_logic_vector(2 downto 0);
+signal orLayer3Bit1 : std_logic_vector(2 downto 0);
+signal orLayer3Bit2 : std_logic_vector(2 downto 0);
+signal orLayer3Bit3 : std_logic_vector(2 downto 0);
+signal orLayer3Bit4 : std_logic_vector(1 downto 0);
+signal orLayer3Bit5 : std_logic_vector(1 downto 0);
+
 begin
 --Generate One Hot
 	oneHot1(46) <= mantissaIn(46); 
@@ -84,11 +100,41 @@ begin
 	orLayerBit5(7) <= oneHot2(46-(32 + 7));
 
 --Generate Output
-	shiftsOut(0) <= orLayerLSB(0) or orLayerLSB(1) or orLayerLSB(2) or orLayerLSB(3) or orLayerLSB(4) or orLayerLSB(5) or orLayerLSB(6) or orLayerLSB(7) or orLayerLSB(8) or orLayerLSB(9) or orLayerLSB(10) or orLayerLSB(11);
-	shiftsOut(1) <= orLayerBit1(0) or orLayerBit1(1) or orLayerBit1(2) or orLayerBit1(3) or orLayerBit1(4) or orLayerBit1(5) or orLayerBit1(6) or orLayerBit1(7) or orLayerBit1(8) or orLayerBit1(9) or orLayerBit1(10) or orLayerBit1(11);
-	shiftsOut(2) <= orLayerBit2(0) or orLayerBit2(1) or orLayerBit2(2) or orLayerBit2(3) or orLayerBit2(4) or orLayerBit2(5) or orLayerBit2(6) or orLayerBit2(7) or orLayerBit2(8) or orLayerBit2(9) or orLayerBit2(10) or orLayerBit2(11);
-	shiftsOut(3) <= orLayerBit3(0) or orLayerBit3(1) or orLayerBit3(2) or orLayerBit3(3) or orLayerBit3(4) or orLayerBit3(5) or orLayerBit3(6) or orLayerBit3(7) or orLayerBit3(8) or orLayerBit3(9) or orLayerBit3(10) or orLayerBit3(11);
-	shiftsOut(4) <= orLayerBit4(0) or orLayerBit4(1) or orLayerBit4(2) or orLayerBit4(3) or orLayerBit4(4) or orLayerBit4(5) or orLayerBit4(6) or orLayerBit4(7);
-	shiftsOut(5) <= orLayerBit5(0) or orLayerBit5(1) or orLayerBit5(2) or orLayerBit5(3) or orLayerBit5(4) or orLayerBit5(5) or orLayerBit5(6) or orLayerBit5(7);
+	generateOrLayers2:
+	for i in 0 to 5 generate
+		orLayer2LSB(i) <= orLayerLSB(i*2) or orLayerLSB(i*2+1);
+		orLayer2Bit1(i) <= orLayerBit1(i*2) or orLayerBit1(i*2+1);
+		orLayer2Bit2(i) <= orLayerBit2(i*2) or orLayerBit2(i*2+1);
+		orLayer2Bit3(i) <= orLayerBit3(i*2) or orLayerBit3(i*2+1);
+		smaller: if i < 4 generate
+			orLayer2Bit4(i) <= orLayerBit4(i*2) or orLayerBit4(i*2+1);
+			orLayer2Bit5(i) <= orLayerBit5(i*2) or orLayerBit5(i*2+1);
+		end generate smaller;
+	end generate generateOrLayers2;
+
+	generateOrLayers3:
+	for i in 0 to 2 generate
+		orLayer3LSB(i) <= orLayer2LSB(i*2) or orLayer2LSB(i*2+1);
+		orLayer3Bit1(i) <= orLayer2Bit1(i*2) or orLayer2Bit1(i*2+1);
+		orLayer3Bit2(i) <= orLayer2Bit2(i*2) or orLayer2Bit2(i*2+1);
+		orLayer3Bit3(i) <= orLayer2Bit3(i*2) or orLayer2Bit3(i*2+1);
+		smaller: if i<= 1 generate
+			orLayer3Bit4(i) <= orLayer2Bit4(i*2) or orLayer2Bit4(i*2+1);
+			orLayer3Bit5(i) <= orLayer2Bit5(i*2) or orLayer2Bit5(i*2+1);
+		end generate smaller;
+	end generate generateOrLayers3;
+
+	shiftsOut(0) <= orLayer3LSB(0) or orLayer3LSB(1) or orLayer3LSB(2);
+	shiftsOut(1) <= orLayer3Bit1(0) or orLayer3Bit1(1) or orLayer3Bit1(2);
+	shiftsOut(2) <= orLayer3Bit2(0) or orLayer3Bit2(1) or orLayer3Bit2(2);
+	shiftsOut(3) <= orLayer3Bit3(0) or orLayer3Bit3(1) or orLayer3Bit3(2);
+	shiftsOut(4) <= orLayer3Bit4(0) or orLayer3Bit4(1);
+	shiftsOut(5) <= orLayer3Bit5(0) or orLayer3Bit5(1);
+	--shiftsOut(0) <= orLayerLSB(0) or orLayerLSB(1) or orLayerLSB(2) or orLayerLSB(3) or orLayerLSB(4) or orLayerLSB(5) or orLayerLSB(6) or orLayerLSB(7) or orLayerLSB(8) or orLayerLSB(9) or orLayerLSB(10) or orLayerLSB(11);
+	--shiftsOut(1) <= orLayerBit1(0) or orLayerBit1(1) or orLayerBit1(2) or orLayerBit1(3) or orLayerBit1(4) or orLayerBit1(5) or orLayerBit1(6) or orLayerBit1(7) or orLayerBit1(8) or orLayerBit1(9) or orLayerBit1(10) or orLayerBit1(11);
+	--shiftsOut(2) <= orLayerBit2(0) or orLayerBit2(1) or orLayerBit2(2) or orLayerBit2(3) or orLayerBit2(4) or orLayerBit2(5) or orLayerBit2(6) or orLayerBit2(7) or orLayerBit2(8) or orLayerBit2(9) or orLayerBit2(10) or orLayerBit2(11);
+	--shiftsOut(3) <= orLayerBit3(0) or orLayerBit3(1) or orLayerBit3(2) or orLayerBit3(3) or orLayerBit3(4) or orLayerBit3(5) or orLayerBit3(6) or orLayerBit3(7) or orLayerBit3(8) or orLayerBit3(9) or orLayerBit3(10) or orLayerBit3(11);
+	--shiftsOut(4) <= orLayerBit4(0) or orLayerBit4(1) or orLayerBit4(2) or orLayerBit4(3) or orLayerBit4(4) or orLayerBit4(5) or orLayerBit4(6) or orLayerBit4(7);
+	--shiftsOut(5) <= orLayerBit5(0) or orLayerBit5(1) or orLayerBit5(2) or orLayerBit5(3) or orLayerBit5(4) or orLayerBit5(5) or orLayerBit5(6) or orLayerBit5(7);
 	
 end behave;
