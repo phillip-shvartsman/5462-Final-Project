@@ -17,11 +17,11 @@ architecture behavioral of renormalizer_tb is
 begin
   signal
   
-  signal A,B,C : std_logic_vector (31 downto 0);
-
-
+  signal enIn, signIn, AH, BH : std_logic;
+  signal expIn : std_logic_vector (7 downto 0);  
+  signal manIn : std_logic_vector (47 downto 0);  
   signal ival : std_logic_vector (59 downto 0);
-  signal exp_res : std_logic_vector (31 downto 0);
+  signal C,exp_res : std_logic_vector (31 downto 0);
   signal iid_sig, resid_sig : string(1 to 6) := "======";
   signal err_sig : bit;
   signal score : integer := 0;
