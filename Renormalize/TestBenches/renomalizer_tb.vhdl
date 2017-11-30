@@ -18,9 +18,11 @@ begin
   signal
   
   signal A,B,C : std_logic_vector (31 downto 0);
+
+
+  signal ival : std_logic_vector (59 downto 0);
   signal exp_res : std_logic_vector (31 downto 0);
-  signal latch,drive : std_ulogic := '0';
-  signal aid_sig, bid_sig, resid_sig : string(1 to 6) := "======";
+  signal iid_sig, resid_sig : string(1 to 6) := "======";
   signal err_sig : bit;
   signal score : integer := 0;
 
@@ -40,8 +42,10 @@ FOR ALL : renormalizer_tb use ENTITY work.renormalizer_tb(behavioral);
 BEGIN -- test architecture
 	
 renorm0:  fpm PORT MAP(enIn,signIn,expIn,manIn,AH,BH,C);
+
+ival <= enIn & signIn & expIn & manIn & AH & BH;	
 	
-gen_vec(aid_sig,bid_sig,resid_sig,A,B,exp_res,C,latch,drive,err_sig,score);
+gen_vec(iid_sig,resid_sig,ival,exp_res,C,err_sig,score);
 
 nm<= mname'VAL(0);
 	
@@ -59,17 +63,15 @@ package renorm_test_vect is
 constant HIGHZ : std_logic_vector (31 downto 0)
            := "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ";
 
-procedure gen_vec (SIGNAL aid_sig,bid_sig,resid_sig : OUT string (1 to 6);
-               SIGNAL aval,bval,exp_res : OUT std_logic_vector (31 downto 0);
+procedure gen_vec (SIGNAL iid_sig,resid_sig : OUT string (1 to 6);
+               SIGNAL ival : std_logic_vector (59 downto 0);
+	       SIGNAL exp_res : std_logic_vector (31 downto 0);
                SIGNAL C : IN std_logic_vector (31 downto 0);
-               SIGNAL latch,drive : OUT std_ulogic;
                SIGNAL err_sig : OUT bit;
                SIGNAL score : OUT integer);
-
 end renorm_test_vect;
 
 package body renorm_test_vect is
-
 procedure gen_vec (SIGNAL iid_sig,resid_sig : OUT string (1 to 6);
                SIGNAL ival : std_logic_vector (59 downto 0);
 	       SIGNAL exp_res : std_logic_vector (31 downto 0);
@@ -81,7 +83,7 @@ file test_data: TEXT OPEN read_mode IS "renormalizer_testvect";
 variable in_test_val : bit_vector (59 downto 0);
 variable result_val : bit_vector (31 downto 0);
 variable std_result_val : std_logic_vector (31 downto 0);
-variable aid,bid,resid : string (1 to 6);
+variable iid,resid : string (1 to 6);
 variable num_tests,num_errors : integer := 0;
 Begin
   aval <= HIGHZ; bval <= HIGHZ; exp_res <= HIGHZ;
