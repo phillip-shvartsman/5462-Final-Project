@@ -1,7 +1,7 @@
 entity renormalizer_tb is
 end renormalizer_tb;
 
-architecture behave of renormalizer_tb is
+architecture behavioral of renormalizer_tb is
 begin
   signal
   
@@ -23,6 +23,6 @@ component renormalizer
 		zOut : out std_logic_vector(31 downto 0)
 	);
 end renormalizer;
-FOR ALL : renormalizer_tb use ENTITY work.renormalizer_tb(behave);
+FOR ALL : renormalizer_tb use ENTITY work.renormalizer_tb(behavioral);
 
-end behave;
+end behavioral;
