@@ -60,9 +60,10 @@ use ieee.numeric_std.all;
 use STD.TEXTIO.all;
 package renorm_test_vect is
 
-constant HIGHZ : std_logic_vector (31 downto 0)
+constant HIGHZ1 : std_logic_vector (31 downto 0)
            := "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ";
-
+constant HIGHZ2 : std_logic_vector (59 downto 0)
+	   := "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ";
 procedure gen_vec (SIGNAL iid_sig,resid_sig : OUT string (1 to 6);
                SIGNAL ival : std_logic_vector (59 downto 0);
 	       SIGNAL exp_res : std_logic_vector (31 downto 0);
@@ -86,7 +87,7 @@ variable std_result_val : std_logic_vector (31 downto 0);
 variable iid,resid : string (1 to 6);
 variable num_tests,num_errors : integer := 0;
 Begin
-  aval <= HIGHZ; bval <= HIGHZ; exp_res <= HIGHZ;
+  ival <= HIGHZ2; exp_res <= HIGHZ1;
   WHILE (NOT ENDFILE(test_data)) LOOP
     --get next input test vector and expected result
     readline(test_data,cur_line);
@@ -99,9 +100,9 @@ Begin
     iid_sig <= "======", aiid after 20 ns; 
     resid_sig <= "======", resid after 20 ns;
     -- drive signals on bus
-    ival <= To_StdLogicVector(in_test_val) after 20 ns, HIGHZ after 80 ns;
+    ival <= To_StdLogicVector(in_test_val) after 20 ns, HIGHZ2 after 80 ns;
     wait for 100 ns;
-    exp_res <= std_result_val after 20 ns, HIGHZ after 80 ns;
+    exp_res <= std_result_val after 20 ns, HIGHZ1 after 80 ns;
     wait for 50 ns;
     ASSERT (C = std_result_val)
        REPORT "result does not agree with expected result"
