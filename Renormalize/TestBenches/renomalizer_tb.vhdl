@@ -36,9 +36,16 @@ component renormalizer
 	);
 end renormalizer;
 FOR ALL : renormalizer_tb use ENTITY work.renormalizer_tb(behavioral);
-end behavioral;
-
 	
+BEGIN -- test architecture
+	
+renorm0:  fpm PORT MAP(enIn,signIn,expIn,manIn,AH,BH,C);
+	
+gen_vec(aid_sig,bid_sig,resid_sig,A,B,exp_res,C,latch,drive,err_sig,score);
+
+nm<= mname'VAL(0);
+	
+END behavioral;
 
 -------------------------------------------------------------------------------
 --  How the Package Test_Vect works
