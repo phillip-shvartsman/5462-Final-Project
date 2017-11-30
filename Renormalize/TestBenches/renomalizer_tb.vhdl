@@ -77,8 +77,8 @@ procedure gen_vec (SIGNAL aid_sig,bid_sig,resid_sig : OUT string (1 to 6);
                SIGNAL err_sig : OUT bit;
                SIGNAL score : OUT integer) is
 variable cur_line : LINE;
-file test_data: TEXT OPEN read_mode IS "fpmvectors";
-variable a_test_val, b_test_val : bit_vector (31 downto 0);
+file test_data: TEXT OPEN read_mode IS "renormalizer_testvect";
+variable in_test_val : bit_vector (59 downto 0);
 variable result_val : bit_vector (31 downto 0);
 variable std_result_val : std_logic_vector (31 downto 0);
 variable aid,bid,resid : string (1 to 6);
@@ -89,8 +89,7 @@ Begin
   WHILE (NOT ENDFILE(test_data)) LOOP
     --get next input test vector and expected result
     readline(test_data,cur_line);
-    read(cur_line,aid); read(cur_line,a_test_val);
-    read(cur_line,bid); read(cur_line,b_test_val);
+    read(cur_line,iid); read(cur_line,in_test_val);
     readline(test_data,cur_line);
     read(cur_line,resid);read(cur_line,result_val);
     std_result_val := To_StdLogicVector(result_val);
