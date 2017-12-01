@@ -19,7 +19,7 @@ signal c : std_logic_vector(9 downto 0);
 signal cExpected : integer;
 signal correct : boolean;
 begin
-correct <= cExpected = to_integer(unsigned(c));
+correct <= (cExpected = to_integer(unsigned(c)));
 uut: exponentIncrementor port map(a,c);
 applyTests: process(rand_num)
 begin
