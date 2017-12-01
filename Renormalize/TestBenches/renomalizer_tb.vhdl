@@ -29,6 +29,19 @@ procedure gen_vec (SIGNAL iid_sig,resid_sig : OUT string (1 to 6);
 variable cur_line : LINE;
 file test_data: TEXT OPEN read_mode IS "C:\Users\user\Documents\GitHub\5462-Final-Project\Renormalize\TestBenches\renormalizer_testvect";
 variable in_test_val : bit_vector (59 downto 0);
+
+variable test_enable : bit;
+variable test_sign: bit;
+variable test_exponent : bit_vector(7 downto 0);
+variable test_mantissa_main : bit_vector(22 downto 0);
+variable test_extra_mantissa : bit_vector(24 downto 0);
+variable test_ahigh : bit;
+variable test_bhigh : bit;
+
+variable result_sign : bit;
+variable result_exponent : bit_vector(7 downto 0);
+variable result_mantissa : bit_vector(22 downto 0);
+
 variable result_val : bit_vector (31 downto 0);
 variable std_result_val : std_logic_vector (31 downto 0);
 variable iid,resid : string (1 to 6);
@@ -38,15 +51,27 @@ Begin
   WHILE (NOT ENDFILE(test_data)) LOOP
     --get next input test vector and expected result
     readline(test_data,cur_line);
-    read(cur_line,iid); read(cur_line,in_test_val);
+    read(cur_line,iid); 
+	read(cur_line,test_enable);
+	read(cur_line,test_sign);
+	read(cur_line,test_exponent);
+	read(cur_line,test_mantissa_main);
+	read(cur_line,test_extra_mantissa);
+	read(cur_line,test_ahigh);
+	read(cur_line,test_bhigh);
     readline(test_data,cur_line);
-    read(cur_line,resid);read(cur_line,result_val);
+    read(cur_line,resid);
+	read(cur_line,result_sign);
+	read(cur_line,result_exponent);
+	read(cur_line,result_mantissa);
+    result_val := result_sign & result_exponent & result_mantissa;
     std_result_val := To_StdLogicVector(result_val);
     num_tests := num_tests + 1;
     -- run through bus cycle to send data to unit
     iid_sig <= "======", iid after 20 ns; 
     resid_sig <= "======", resid after 20 ns;
     -- drive signals on bus
+    in_test_val := test_enable & test_sign & test_exponent & test_mantissa_main & test_extra_mantissa & test_ahigh & test_bhigh;
     ival <= To_StdLogicVector(in_test_val);
     wait for 100 ns;
     exp_res <= std_result_val;
