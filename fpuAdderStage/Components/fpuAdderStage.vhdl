@@ -88,7 +88,7 @@ ARCHITECTURE dataflow OF fpuAdderStage IS
   
 BEGIN
   --If doing subtraction, filp the sign of B.
-  signBCorrect <= NOT signB     when (ASM = "01") else  --Subtraction
+  signBCorrect <= NOT signB     when (ASM(0) = '1') else  --Subtraction
                   signB;  --Addition
   
   --Compare the exponents
@@ -152,17 +152,17 @@ BEGIN
   oper        <=  (NOT ASM(1));
   
   --Selection for signZ
-  signZ       <=  signA       when (NOT En_in = '1') else
-                  signZtemp   when ((En_in AND oper) = '1') else
+  signZ       <=  signA       when (En_in = '0') else
+                  signZtemp   when (oper = '1') else
                   'Z';
   
   --Selection for expZ
-  expZ        <=  expA        when (NOT En_in = '1') else
-                  expZtemp    when ((En_in AND oper) = '1') else
+  expZ        <=  expA        when (En_in = '0') else
+                  expZtemp    when (oper = '1') else
                   (others => 'Z');
   --Selection for manZ
-  manZ        <=  manApadded  when (NOT En_in = '1') else
-                  manZtemp    when ((En_in AND oper) = '1') else
+  manZ        <=  manApadded  when (En_in = '1') else
+                  manZtemp    when (oper = '1') else
                   (others => 'Z');
                   
   --Output Ahigh and Bhigh
