@@ -19,7 +19,8 @@ ENTITY fpuAdderStage IS
           signZ       : OUT std_logic;
           expZ        : OUT std_logic_vector(7 downto 0);
           manZ        : OUT std_logic_vector(47 downto 0);
-          Ahigh,Bhigh : OUT std_logic
+          Ahigh,Bhigh : OUT std_logic;
+	  En_out      : OUT std_logic
         );
 END fpuAdderStage;
 

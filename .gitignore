@@ -3,3 +3,5 @@
 *.vhdl.bak
 *.ini
 *.wlf
+*.opt
+/work/*
