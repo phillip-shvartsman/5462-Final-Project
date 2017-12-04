@@ -3,23 +3,23 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 
-ENTITY fpuPrepareStage IS
-  PORT( Ain,Bin     : IN std_logic_vector(31 downto 0);
-        ASM      			: IN std_logic_vector(1 downto 0);
-        sA, sB, EN  : OUT std_logic;
-        expA, expB  : OUT std_logic_vector(7 downto 0);
-	      manA, manB  : OUT std_logic_vector(23 downto 0)
-	    );
-END fpuPrepareStage;
+ENTITY prepare IS
+  PORT( Ain,Bin 			: IN std_logic_vector;
+        add_sub_mult 			: IN std_logic_vector;
+        sA, sB, EN			: OUT std_logic;
+        expA, expB, manA, manB   	: OUT std_logic_vector);
+END prepare;
 
 
 
-ARCHITECTURE prep_AB OF fpuPrepareStage IS
+ARCHITECTURE prep_AB OF prepare IS
 
-    SIGNAL add_sZ, mult_sZ, sA_in, sB_in, sR			         : std_logic;
-    SIGNAL add_expZ, mult_expZ, expA_in, expB_in, expR  : std_logic_vector(7 downto 0);
-    SIGNAL add_fracZ, mult_fracZ, fracA_in, fracB_in	   : std_logic_vector(22 downto 0);
-    SIGNAL manR                                         : std_logic_vector(23 downto 0);
+    SIGNAL sA_in, sB_in, sR_in		: std_logic;
+    SIGNAL expA_in, expB_in, expR_in  	: std_logic_vector(7 downto 0);
+    SIGNAL fracA_in, fracB_in		: std_logic_vector(22 downto 0); 
+    SIGNAL add_sZ, mult_sZ		: std_logic_vector(1 downto 0);
+    SIGNAL add_expZ, mult_expZ 		: std_logic_vector(8 downto 0);
+    SIGNAL add_fracZ, mult_fracZ	: std_logic_vector(23 downto 0);
      
   BEGIN
 
@@ -29,67 +29,115 @@ ARCHITECTURE prep_AB OF fpuPrepareStage IS
     sA_in <= Ain(31); expA_in <= Ain(30 downto 23); fracA_in <= Ain(22 downto 0);
     sB_in <= Bin(31); expB_in <= Bin(30 downto 23); fracB_in <= Bin(22 downto 0);
 
+    sB <= Bin(31); expB <= Bin(30 downto 23);
+
+
  -- Handle Multiplication Special Cases
-    mult_sZ <=  '0'			when 	(expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR (expB_in = x"FF" AND fracB_in /= x"00000"&"000") OR ((expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"00" AND fracB_in = x"00000"&"000")) OR ((expA_in = x"00" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000")) else
-                sA_in XOR sB_in;
-
-    mult_expZ <=  x"FF"             when  (expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR (expB_in = x"FF" AND fracB_in /= x"00000"&"000") OR ((expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"00" AND fracB_in = x"00000"&"000"))	OR ((expA_in = x"00" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000"))	OR	((expA_in = x"FF" AND fracA_in = x"00000"&"000") OR (expB_in = x"FF" AND fracB_in = x"00000"&"000"))	else
-                  (others => '0')   when  ((expA_in = x"00" AND fracA_in = x"00000"&"000") OR (expB_in = x"00" AND fracB_in = x"00000"&"000"))	else
-                  expA_in;
+    mult_sZ <= "00"			when 	(expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR 
+     						(expB_in = x"FF" AND fracB_in /= x"00000"&"000") OR
+       						((expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"00" AND fracB_in = x"00000"&"000")) OR
+       						((expA_in = x"00" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000")) else
 
 
-    mult_fracZ  <=  x"00000"&"001"   	when  (expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR (expB_in = x"FF" AND fracB_in /= x"00000"&"000") OR ((expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"00" AND fracB_in = x"00000"&"000")) OR ((expA_in = x"00" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000"))	else
-                    (others => '0')   when  ((expA_in = x"FF" AND fracA_in = x"00000"&"000") OR (expB_in = x"FF" AND fracB_in = x"00000"&"000")) OR ((expA_in = x"00" AND fracA_in = x"00000"&"000") OR (expB_in = x"00" AND fracB_in = x"00000"&"000"))	else
-	                  fracA_in;
+	sA_in XOR sB_in&'1';
+
+    mult_expZ <= x"FF"&'0'   		when   	(expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR 
+       			   			(expB_in = x"FF" AND fracB_in /= x"00000"&"000") OR
+   			   			((expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"00" AND fracB_in = x"00000"&"000")) 	OR
+       			   			((expA_in = x"00" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000")) 	OR	
+						((expA_in = x"FF" AND fracA_in = x"00000"&"000") OR (expB_in = x"FF" AND fracB_in = x"00000"&"000"))	else
+
+       (others => '0')    		when 	((expA_in = x"00" AND fracA_in = x"00000"&"000") OR (expB_in = x"00" AND fracB_in = x"00000"&"000"))	else
+	
+	expA_in&'1';
+
+
+    mult_fracZ <= x"00000"&"0010"   	when	(expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR 
+      						(expB_in = x"FF" AND fracB_in /= x"00000"&"000") OR
+    						((expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"00" AND fracB_in = x"00000"&"000")) 	OR
+       						((expA_in = x"00" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000"))	else
+
+        (others => '0')       		when    ((expA_in = x"FF" AND fracA_in = x"00000"&"000") OR (expB_in = x"FF" AND fracB_in = x"00000"&"000"))   	OR 
+ 						((expA_in = x"00" AND fracA_in = x"00000"&"000") OR (expB_in = x"00" AND fracB_in = x"00000"&"000"))	else
+	
+	fracA_in&'1';
 
 
     -- Handle Addition Special Cases
-    add_sZ  <=  '1'     when  (expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR (expB_in = x"FF" AND fracB_in /= x"00000"&"000") OR ((sA_in /= sB_in) AND (expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000")) 	else
-            '0' 		  when  ((sA_in = sB_in) AND (expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000")) else
-            sA_in   when 	(expA_in = x"FF" AND fracA_in = x"00000"&"000") OR (expB_in = x"00" AND fracB_in = x"00000"&"000") else
-            sB_in   when 	(expB_in = x"FF" AND fracB_in = x"00000"&"000") OR (expA_in = x"00" AND fracA_in = x"00000"&"000") else
-            sA_in;
-                
-    add_expZ  <=  x"FF"   		when  (expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR (expB_in = x"FF" AND fracB_in /= x"00000"&"000") OR ((expA_in = x"FF" AND fracA_in = x"00000"&"000") OR (expB_in = x"FF" AND fracB_in = x"00000"&"000"))  else
-                  expA_in   when  (expB_in = x"00" AND fracB_in = x"00000"&"000") else
-                  expB_in   when	 (expA_in = x"00" AND fracA_in = x"00000"&"000") else
-                  expA_in;
+    add_sZ <= "10"  			when   	(expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR 
+       			   			(expB_in = x"FF" AND fracB_in /= x"00000"&"000") OR
+   			   			((sA_in /= sB_in) AND (expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000")) 	else
+
+        "00"      			when    ((sA_in = sB_in) AND (expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000")) 	else
+
+        sA_in&'0'	   		when 	(expA_in = x"FF" AND fracA_in = x"00000"&"000") OR
+						(expB_in = x"00" AND fracB_in = x"00000"&"000") else
+
+	sB_in&'0'			when 	(expB_in = x"FF" AND fracB_in = x"00000"&"000") OR
+						(expA_in = x"00" AND fracA_in = x"00000"&"000") else
+
+	sA_in&'1';
 
 
-    add_fracZ <=  x"00000"&"001"   	when  (expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR (expB_in = x"FF" AND fracB_in /= x"00000"&"000") OR ((sA_in /= sB_in) AND (expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000")) 	else
-                  (others => '0')   when  ((expA_in = x"FF" AND fracA_in = x"00000"&"000") OR (expB_in = x"FF" AND fracB_in = x"00000"&"000")) else 
-                  fracA_in		        when 	(expB_in = x"00" AND fracB_in = x"00000"&"000") else
-                  fracB_in			       when 	(expA_in = x"00" AND fracA_in = x"00000"&"000") else
-                  fracA_in;
+    add_expZ <= x"FF"&'0'   		when   	(expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR 
+       			   			(expB_in = x"FF" AND fracB_in /= x"00000"&"000") OR
+						((expA_in = x"FF" AND fracA_in = x"00000"&"000") OR (expB_in = x"FF" AND fracB_in = x"00000"&"000"))  else
 
-    -- Handle Resolved output for Add or Multiply 
-   sR <=  mult_sZ		when (ASM(1) = '1') else
-          add_sZ;
+	expA_in&'0'		    	when 	(expB_in = x"00" AND fracB_in = x"00000"&"000") else
 	
-   expR <=  mult_expZ		when (ASM(1) = '1') else
-            add_expZ;
+	expB_in&'0'			when	(expA_in = x"00" AND fracA_in = x"00000"&"000") else
+	
+	expA_in&'1';
 
-   manR <=  '0'&add_fracZ   when (ASM(1) = '0' AND expA_in = x"00") 	else
-		        '1'&add_fracZ		 when (ASM(1) = '0' AND expA_in /= x"00") else
-            '0'&mult_fracZ  when (ASM(1) = '1' AND expA_in = x"00") 	else
-            '1'&mult_fracZ  when (ASM(1) = '1' AND expA_in /= x"00");
+
+    add_fracZ <= x"00000"&"0010"   	when   	(expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR 
+       			   			(expB_in = x"FF" AND fracB_in /= x"00000"&"000") OR
+   			   			((sA_in /= sB_in) AND (expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000")) 	else
+
+        (others => '0')       		when    ((expA_in = x"FF" AND fracA_in = x"00000"&"000") OR (expB_in = x"FF" AND fracB_in = x"00000"&"000"))   	else 
+
+        fracA_in&'0'		   	when 	(expB_in = x"00" AND fracB_in = x"00000"&"000")  else
+
+	fracB_in&'0'			when 	(expA_in = x"00" AND fracA_in = x"00000"&"000")  else 
+
+	fracA_in&'1';
+    
+
 
    -- Enable bit if A and B are not special cases
-   en <= '1'  when (sR&expR&manR(22 downto 0) = Ain) else
-	       '0';
-	       
-	 -- Output A and B
-	 sA <= sR;
-	 
-	 expA <= expR;
-	 
-	 manA <= manR;
-	 
-	 sB <= Bin(31);
-	 
-	 expB <= Bin(30 downto 23);
-	 
-	 manB <=  '0'&fracB_in		when (expB_in = x"00") else
-	          '1'&fracB_in;
+   en <= '0'			when (add_sub_mult(1) = '1' AND (mult_sZ(0) = '0' OR mult_expZ(0) = '0' OR mult_fracZ(0) = '0')) else
+
+	'0'			when (add_sub_mult(1) = '0' AND (add_sZ(0) = '0' OR add_expZ(0) = '0' OR add_fracZ(0) = '0'))	else
+
+	'1';
+
+
+    -- Handle Output for Add or Multiply 
+   sA <= mult_sZ(1)				when (add_sub_mult(1) = '1') else
+
+	add_sZ(1);
+	
+   expA <= mult_expZ(8 downto 1)		when (add_sub_mult(1) = '1') else
+	
+	add_expZ(8 downto 1);
+
+   manA <= '0'&add_fracZ(23 downto 1)		when (add_sub_mult(1) = '0' AND en = '0') 	else
+
+	'0'&mult_fracZ(23 downto 1)		when (add_sub_mult(1) = '1' AND en = '0')	else
+
+	'0'&add_fracZ(23 downto 1)		when (add_sub_mult(1) = '0' AND expA_in = x"00") else
+
+	'1'&add_fracZ(23 downto 1)		when (add_sub_mult(1) = '0' AND expA_in /= x"00") else
+
+	'0'&mult_fracZ(23 downto 1)		when (add_sub_mult(1) = '1' AND expA_in = x"00") else
+	
+	'1'&mult_fracZ(23 downto 1)		when (add_sub_mult(1) = '1' AND expA_in /= x"00");
+
+   manB <= '0'&fracB_in		when(en = '0') else
+
+	'0'&fracB_in		when (expB_in = x"00") else
+	
+	'1'&fracB_in		when (expB_in /= x"00");
+
 
 END prep_AB;
