@@ -174,7 +174,7 @@ begin
 		
 --Enable Bit
 	with enableIn select zOut <=
-		signIn & exponentIn(7 downto 0) & mantissaIn(45 downto 23) when '0',
+		signIn & exponentIn(7 downto 0) & mantissaIn(46 downto 24) when '0',
 		signIn & exponentRenorm(7 downto 0) & mantissaRenorm(45 downto 23) when '1',
 		(others=>'Z') when others; 
 

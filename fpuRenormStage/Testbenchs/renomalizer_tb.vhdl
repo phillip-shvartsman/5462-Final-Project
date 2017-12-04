@@ -27,7 +27,7 @@ procedure gen_vec (SIGNAL iid_sig,resid_sig : OUT string (1 to 6);
                SIGNAL err_sig : OUT bit;
                SIGNAL score : OUT integer) is
 variable cur_line : LINE;
-file test_data: TEXT OPEN read_mode IS "./fpuRenormStage/TestBenches/renormalizer_testvect";
+file test_data: TEXT OPEN read_mode IS "C:\Users\user\Documents\GitHub\5462-Final-Project\fpuRenormStage\Testbenchs\renormalizer_testvect";
 variable in_test_val : bit_vector (59 downto 0);
 
 variable test_enable : bit;
