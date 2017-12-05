@@ -8,7 +8,7 @@ ENTITY fpuPrepareStage IS
         add_sub_mult 			: IN std_logic_vector;
         sA, sB, EN			: OUT std_logic;
         expA, expB, manA, manB   	: OUT std_logic_vector);
-END fpuPrepareStage 
+END fpuPrepareStage; 
 
 
 
@@ -139,4 +139,4 @@ ARCHITECTURE prepare_vectors OF fpuPrepareStage IS
 	'1'&fracB_in		when (expB_in /= x"00");
 
 
-END prepare_vectors 
+END prepare_vectors;
