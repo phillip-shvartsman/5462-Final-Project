@@ -161,7 +161,7 @@ BEGIN
                   expZtemp    when (oper = '1') else
                   (others => 'Z');
   --Selection for manZ
-  manZ        <=  manApadded  when (En_in = '1') else
+  manZ        <=  manApadded  when (En_in = '0') else
                   manZtemp    when (oper = '1') else
                   (others => 'Z');
                   
