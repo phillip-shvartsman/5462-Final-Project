@@ -3,16 +3,16 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 
-ENTITY prepare IS
+ENTITY fpuPrepareStage IS
   PORT( Ain,Bin 			: IN std_logic_vector;
         add_sub_mult 			: IN std_logic_vector;
         sA, sB, EN			: OUT std_logic;
         expA, expB, manA, manB   	: OUT std_logic_vector);
-END prepare;
+END fpuPrepareStage 
 
 
 
-ARCHITECTURE prep_AB OF prepare IS
+ARCHITECTURE prepare_vectors OF fpuPrepareStage IS
 
     SIGNAL sA_in, sB_in, sR_in		: std_logic;
     SIGNAL expA_in, expB_in, expR_in  	: std_logic_vector(7 downto 0);
@@ -139,4 +139,4 @@ ARCHITECTURE prep_AB OF prepare IS
 	'1'&fracB_in		when (expB_in /= x"00");
 
 
-END prep_AB;
+END prepare_vectors 
