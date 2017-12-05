@@ -2,11 +2,11 @@ library ieee;
 use ieee.std_logic_1164.all;
 use STD.TEXTIO.all;
 
-package prepare_test is
+package fpuPrepareStage_test is
 
 constant ZEROS : std_logic_vector (32 downto 0) := (others => '0');
 
-procedure prepare_vec (	SIGNAL aid_sig, bid_sig 	: OUT string (1 to 6);
+procedure prepare_vect (SIGNAL aid_sig, bid_sig 	: OUT string (1 to 6);
 			SIGNAL aval, bval 		: OUT std_logic_vector (31 downto 0);
 			SIGNAL ASMval 			: OUT std_logic_vector(1 downto 0);
   			SIGNAL s_A, s_B, ENABLE 	: IN std_logic;
@@ -20,11 +20,11 @@ procedure prepare_vec (	SIGNAL aid_sig, bid_sig 	: OUT string (1 to 6);
   			SIGNAL EX_sA_val, EX_sB_val	: OUT std_logic;
 			SIGNAL EX_enable_val		: OUT std_logic
 			);
-end prepare_test;
+end fpuPrepareStage_test 
 
-package body prepare_test is
+package body fpuPrepareStage_test is
 
-procedure prepare_vec (	SIGNAL aid_sig, bid_sig 	: OUT string (1 to 6);
+procedure prepare_vect (SIGNAL aid_sig, bid_sig 	: OUT string (1 to 6);
 			SIGNAL aval, bval 		: OUT std_logic_vector (31 downto 0);
 			SIGNAL ASMval 			: OUT std_logic_vector(1 downto 0);
   			SIGNAL s_A, s_B, ENABLE 	: IN std_logic;
@@ -138,8 +138,8 @@ procedure prepare_vec (	SIGNAL aid_sig, bid_sig 	: OUT string (1 to 6);
 
 	wait for 100 ns;
 	wait;
-END prepare_vec;
-END prepare_test;
+END prepare_vect;
+END fpuPrepareStage_test 
 	
 
 
@@ -162,14 +162,14 @@ ARCHITECTURE my_test of prep_tb is
 
 
 -- Place your component declaration and configuration here
-	COMPONENT prepare 
+	COMPONENT fpuPrepareStage 
   		PORT( 	Ain,Bin 			: IN std_logic_vector;
        			add_sub_mult 			: IN std_logic_vector;
         		sA, sB, EN			: OUT std_logic;
         		expA, expB, manA, manB   	: OUT std_logic_vector);
 	END COMPONENT;
 
-	FOR ALL : prepare USE ENTITY WORK.prepare(prep_AB);
+	FOR ALL : fpuPrepareStage USE ENTITY WORK.fpuPrepareStage(prepare_vectors);
 
   SIGNAL 	A,B 			: std_logic_vector (31 downto 0);
   SIGNAL 	AddSubMult 		: std_logic_vector(1 downto 0);
@@ -195,7 +195,7 @@ BEGIN -- test architecture
 		exp_A, exp_B, man_A, man_B
 		);
 
-	prepare_vec   ( aid_sig, bid_sig, 
+	prepare_vect  ( aid_sig, bid_sig, 
 			A, B, 
 			AddSubMult, 
 			s_A, s_B, ENABLE, 
