@@ -20,7 +20,7 @@ procedure prepare_vect (SIGNAL aid_sig, bid_sig 	: OUT string (1 to 6);
   			SIGNAL EX_sA_val, EX_sB_val	: OUT std_logic;
 			SIGNAL EX_enable_val		: OUT std_logic
 			);
-end fpuPrepareStage_test 
+end fpuPrepareStage_test; 
 
 package body fpuPrepareStage_test is
 
@@ -139,7 +139,7 @@ procedure prepare_vect (SIGNAL aid_sig, bid_sig 	: OUT string (1 to 6);
 	wait for 100 ns;
 	wait;
 END prepare_vect;
-END fpuPrepareStage_test 
+END fpuPrepareStage_test; 
 	
 
 
@@ -156,7 +156,7 @@ END prep_tb;
 LIBRARY  IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE STD.TEXTIO.all;
-USE work.prepare_test.all;
+USE work.fpuPrepareStage_test.all;
 
 ARCHITECTURE my_test of prep_tb is
 
@@ -188,7 +188,7 @@ ARCHITECTURE my_test of prep_tb is
 BEGIN -- test architecture
 	
 -- Instantiate your component here
-	prep0:  prepare PORT MAP
+	prep0:  fpuPrepareStage PORT MAP
 	      ( A, B, 
 		AddSubMult, 
 		s_A, s_B, ENABLE, 
