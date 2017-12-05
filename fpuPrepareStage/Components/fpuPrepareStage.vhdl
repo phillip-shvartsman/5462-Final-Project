@@ -17,9 +17,9 @@ ARCHITECTURE prepare_vectors OF fpuPrepareStage IS
     SIGNAL sA_in, sB_in, sR_in		: std_logic;
     SIGNAL expA_in, expB_in, expR_in  	: std_logic_vector(7 downto 0);
     SIGNAL fracA_in, fracB_in		: std_logic_vector(22 downto 0); 
-    SIGNAL add_sZ, mult_sZ		: std_logic_vector(1 downto 0);
-    SIGNAL add_expZ, mult_expZ 		: std_logic_vector(8 downto 0);
-    SIGNAL add_fracZ, mult_fracZ	: std_logic_vector(23 downto 0);
+    SIGNAL add_sZ, mult_sZ		: std_logic_vector(1 downto 0); --last bit is enable flag
+    SIGNAL add_expZ, mult_expZ 		: std_logic_vector(8 downto 0); --last bit is enable flag
+    SIGNAL add_fracZ, mult_fracZ	: std_logic_vector(23 downto 0); --last bit is enable flag
      
   BEGIN
 
@@ -103,7 +103,7 @@ ARCHITECTURE prepare_vectors OF fpuPrepareStage IS
     
 
 
-   -- Enable bit if A and B are not special cases
+   -- Checks enable flag to see if it has been toggled
    en <= '0'			when (add_sub_mult(1) = '1' AND (mult_sZ(0) = '0' OR mult_expZ(0) = '0' OR mult_fracZ(0) = '0')) else
 
 	'0'			when (add_sub_mult(1) = '0' AND (add_sZ(0) = '0' OR add_expZ(0) = '0' OR add_fracZ(0) = '0'))	else
