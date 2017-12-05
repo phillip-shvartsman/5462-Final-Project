@@ -24,8 +24,7 @@ ARCHITECTURE test OF fpuAdderStage_tb IS
             signZ       : OUT std_logic;
             expZ        : OUT std_logic_vector(7 downto 0);
             manZ        : OUT std_logic_vector(47 downto 0);
-            Ahigh,Bhigh : OUT std_logic;
-            En_out      : OUT std_logic
+            Ahigh,Bhigh : OUT std_logic
           );
   END COMPONENT;
   
@@ -40,7 +39,6 @@ ARCHITECTURE test OF fpuAdderStage_tb IS
   SIGNAL  expZ        : std_logic_vector(7 downto 0);
   SIGNAL  manZ        : std_logic_vector(47 downto 0);
   SIGNAL  Ahigh,Bhigh : std_logic;
-  SIGNAL  En_out      : std_logic;
   
   SIGNAL  expected_signZ  : std_logic;
   SIGNAL  expected_expZ   : std_logic_vector(7 downto 0);
@@ -57,8 +55,7 @@ BEGIN
       signZ,
       expZ,
       manZ,
-      Ahigh,Bhigh,
-      En_out
+      Ahigh,Bhigh
     );
   
   gen_vec ( signA, signB,
