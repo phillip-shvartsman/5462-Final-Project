@@ -64,7 +64,7 @@ ARCHITECTURE dataflow OF fpu IS
   	     );
   END COMPONENT;
   
-  FOR ALL : fpuPrepareStage     USE ENTITY WORK.fpuPrepareStage(prep_AB);
+  FOR ALL : fpuPrepareStage     USE ENTITY WORK.fpuPrepareStage(prepare_vectors);
   FOR ALL : fpuAdderStage       USE ENTITY WORK.fpuAdderStage(dataflow);
   FOR ALL : fpuMultiplierStage  USE ENTITY WORK.fpuMultiplierStage(design);
   FOR ALL : renormalizer        USE ENTITY WORK.renormalizer(behave);
