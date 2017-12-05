@@ -64,13 +64,12 @@ ARCHITECTURE prep_AB OF prepare IS
 
 
     -- Handle Addition Special Cases
-    add_sZ <= "10"  			when   	(expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR 
+    add_sZ <= "00"  			when   	(expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR 
        			   			(expB_in = x"FF" AND fracB_in /= x"00000"&"000") OR
    			   			((sA_in /= sB_in) AND (expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000")) 	else
 
-        "00"      			when    ((sA_in = sB_in) AND (expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000")) 	else
-
-        sA_in&'0'	   		when 	(expA_in = x"FF" AND fracA_in = x"00000"&"000") OR
+        sA_in&'0'	   		when 	((sA_in = sB_in) AND (expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000")) OR
+						(expA_in = x"FF" AND fracA_in = x"00000"&"000") OR
 						(expB_in = x"00" AND fracB_in = x"00000"&"000") else
 
 	sB_in&'0'			when 	(expB_in = x"FF" AND fracB_in = x"00000"&"000") OR
