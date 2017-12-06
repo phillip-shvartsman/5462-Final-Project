@@ -26,7 +26,7 @@ ARCHITECTURE design OF fpuMultiplierStage IS
 
 	
 	--Booth multiplier component
-	COMPONENT boothMultiplier
+	COMPONENT cmaMultiplier
 	  PORT( inputL,inputR   : IN  std_logic_vector(23 downto 0);
           output          : OUT std_logic_vector(47 downto 0));
 	 
@@ -34,7 +34,7 @@ ARCHITECTURE design OF fpuMultiplierStage IS
 
 	-- COMPONENT CONFIGURATIONS
 	FOR ALL: rippleadder USE ENTITY WORK.rippleadder(dataflow);
-	FOR ALL: boothMultiplier USE ENTITY WORK.boothMultiplier(dataflow);
+	FOR ALL: cmaMultiplier USE ENTITY WORK.cmaMultiplier(dataflow);
 	
 	-- Internal Signals
 	SIGNAL C_OUT : STD_LOGIC := '0';
@@ -62,7 +62,7 @@ BEGIN
 	 
 
 	  -- MAN_Z:
-	  ADD_MAN: boothMultiplier PORT MAP(MAN_A, MAN_B, manZtemp);
+	  ADD_MAN: cmaMultiplier PORT MAP(MAN_A, MAN_B, manZtemp);
 		MAN_Z<= MAN_A&"000000000000000000000000" when EN='0' else
 		        manZtemp when oper(1)='1' else
 		        (others => 'Z');

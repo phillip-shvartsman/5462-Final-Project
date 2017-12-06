@@ -26,8 +26,8 @@ ARCHITECTURE test OF cmaMultiplier_tb IS
   SIGNAL output         : std_logic_vector(47 downto 0) := (others => '0');
   
 BEGIN
-  inputL <= x"000003" after 5 ns;
-  inputR <= x"000030" after 10 ns, x"000000" after 20 ns;
+  inputL <= x"96231f" after 5 ns;
+  inputR <= x"ef445a" after 10 ns, x"000000" after 20 ns;
   
   Mult : cmaMultiplier PORT MAP
     ( inputL, inputR,
