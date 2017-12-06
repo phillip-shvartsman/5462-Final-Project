@@ -8,3 +8,5 @@ vcom -reportprogress 300 -work work ./fpuGeneral/Testbenchs/cma24bits_tb.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Testbenchs/cma25bits_tb.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Testbenchs/cma48bits_tb.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Testbenchs/cma49bits_tb.vhdl
+vcom -reportprogress 300 -work work ./fpuGeneral/Testbenchs/cma64bits_test_vect.vhdl
+vcom -reportprogress 300 -work work ./fpuGeneral/Testbenchs/cma64bits_tb.vhdl

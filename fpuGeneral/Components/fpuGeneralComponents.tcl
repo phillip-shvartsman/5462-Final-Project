@@ -7,6 +7,7 @@ vcom -reportprogress 300 -work work ./fpuGeneral/Components/cmaSum_Unit.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Components/cmaCarry_Unit.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Components/cmaAdderCell_Level2.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Components/cmaAdderCell_Level3.vhdl
+vcom -reportprogress 300 -work work ./fpuGeneral/Components/cmaLastAdderCell_Level3.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Components/cmaHalfAdderCell_Level2.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Components/cmaHalfAdderCell_Level3.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Components/cmaSubstage_Level2.vhdl
@@ -15,6 +16,8 @@ vcom -reportprogress 300 -work work ./fpuGeneral/Components/cmaStage.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Components/cma8bits.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Components/cma24bits.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Components/cma25bits.vhdl
+vcom -reportprogress 300 -work work ./fpuGeneral/Components/cma26bits.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Components/cma48bits.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Components/cma49bits.vhdl
+vcom -reportprogress 300 -work work ./fpuGeneral/Components/cma64bits.vhdl
 vcom -reportprogress 300 -work work ./fpuGeneral/Components/barrelShifter.vhdl
