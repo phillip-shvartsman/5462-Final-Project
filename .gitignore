@@ -6,3 +6,5 @@
 *.opt
 transcript
 /work/*
+.directory
+*~
