@@ -30,25 +30,6 @@ ARCHITECTURE dataflow OF cma24bits IS
           );
   END COMPONENT;
   
-  COMPONENT cmaSubstage_Level2 IS
-    PORT  ( A,B                 : IN  std_logic_vector;
-            muxCtrlin           : IN  std_logic;
-            sum                 : OUT std_logic_vector;
-            cout,coutP0,coutP1  : OUT std_logic;
-            muxCtrlout          : OUT std_logic
-          );
-  END COMPONENT;
-  
-  COMPONENT cmaSubstage_Level3 IS
-    PORT  ( A,B                                   : IN  std_logic_vector;
-            cin                                   : IN  std_logic;
-            muxCtrlin,muxCtrlP0in,muxCtrlP1in     : IN  std_logic;
-            sum                                   : OUT std_logic_vector;
-            cout,coutP0,coutP1                    : OUT std_logic;
-            muxCtrlout,muxCtrlP0out,muxCtrlP1out  : OUT std_logic
-          );
-  END COMPONENT;
-  
   COMPONENT rippleadder IS
     PORT  ( A,B   : IN  std_logic_vector;
             cin   : IN  std_logic;
@@ -58,8 +39,6 @@ ARCHITECTURE dataflow OF cma24bits IS
   END COMPONENT;
   
   FOR ALL : cmaStage            USE ENTITY  WORK.cmaStage(dataflow);
-  FOR ALL : cmaSubstage_Level2  USE ENTITY  WORK.cmaSubstage_Level2(dataflow);
-  FOR ALL : cmaSubstage_Level3  USE ENTITY  WORK.cmaSubstage_Level3(dataflow);
   FOR ALL : rippleadder         USE ENTITY  WORK.rippleadder(dataflow);
   
   SIGNAL carry    :  std_logic_vector(5 downto 0);
@@ -81,7 +60,7 @@ BEGIN
     
     --Stage for next 5 bits (7-3)
     STAGE2 : IF i = 1 GENERATE
-      cmaStage1 : cmaStage
+      cmaStage2 : cmaStage
       GENERIC MAP ( Init => 1 )
       PORT MAP  ( A(4 downto 2), B(4 downto 2),
                   carry(i),
@@ -92,7 +71,7 @@ BEGIN
     
     --Stage for next 9 bits (16-8)
     STAGE3 : IF i = 2 GENERATE
-      cmaStage1 : cmaStage
+      cmaStage3 : cmaStage
         GENERIC MAP ( Init => 1 )
         PORT MAP  ( A(10 downto 5), B(10 downto 5),
                     carry(i),
@@ -102,7 +81,7 @@ BEGIN
     END GENERATE STAGE3;
     
     STAGE4 : IF i = 3 GENERATE
-      cmaStage1 : cmaStage
+      cmaStage4 : cmaStage
         GENERIC MAP ( Init => 1 )
         PORT MAP  ( A(20 downto 11), B(20 downto 11),
                     carry(i),
@@ -112,7 +91,7 @@ BEGIN
     END GENERATE STAGE4;
     
     STAGE5 : IF i = 4 GENERATE
-      cmaStage1 : cmaStage
+      cmaStage5 : cmaStage
         GENERIC MAP ( Init => 1 )
         PORT MAP  ( A(23 downto 21), B(23 downto 21),
                     carry(i),

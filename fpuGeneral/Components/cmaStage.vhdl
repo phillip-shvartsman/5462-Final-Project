@@ -51,10 +51,10 @@ BEGIN
   GEN_SUBSTAGES : FOR i IN carry'REVERSE_RANGE GENERATE
     Substage_Level2 : IF i = carry'LOW GENERATE
       Substage0 : cmaSubstage_Level2 PORT MAP
-        ( A(Init-1+A'LOW downto A'LOW), B(Init-1+B'LOW downto B'LOW), 
-          cin, 
-          sum(Init-1+sum'LOW downto sum'LOW), 
-          carry(i), carryP0(i), carryP1(i), 
+        ( A(Init-1+A'LOW downto A'LOW), B(Init-1+B'LOW downto B'LOW),
+          cin,
+          sum(Init-1+sum'LOW downto sum'LOW),
+          carry(i), muxCtrlP0(i), muxCtrlP1(i),
           muxCtrl(i)
         );
     END GENERATE Substage_Level2;
@@ -62,10 +62,10 @@ BEGIN
     Substages_Level3 : IF i > carry'LOW GENERATE
       SubstageX : cmaSubstage_Level3 PORT MAP
         ( A((i+1)*Init+(i+1)*i/2-1+A'LOW downto i*Init+(i-1)*i/2+A'LOW), B((i+1)*Init+(i+1)*i/2-1+B'LOW downto i*Init+(i-1)*i/2+B'LOW), 
-          carry(i-1), 
-          muxCtrl(i-1), carryP0(i-1), carryP1(i-1), 
-          sum((i+1)*Init+(i+1)*i/2-1+sum'LOW downto i*Init+(i-1)*i/2+sum'LOW), 
-          carry(i), carryP0(i), carryP1(i), 
+          carry(i-1),
+          muxCtrl(i-1), muxCtrlP0(i-1), muxCtrlP1(i-1),
+          sum((i+1)*Init+(i+1)*i/2-1+sum'LOW downto i*Init+(i-1)*i/2+sum'LOW),
+          carry(i), carryP0(i), carryP1(i),
           muxCtrl(i), muxCtrlP0(i), muxCtrlP1(i)
         );
     END GENERATE Substages_Level3;
