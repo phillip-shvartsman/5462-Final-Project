@@ -38,6 +38,9 @@ ARCHITECTURE prepare_vectors OF fpuPrepareStage IS
        						((expA_in = x"FF" AND fracA_in = x"00000"&"000") AND (expB_in = x"00" AND fracB_in = x"00000"&"000")) OR
        						((expA_in = x"00" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000")) else
 
+	sA_in XOR sB_in&'0'		when 	((expA_in = x"FF" AND fracA_in = x"00000"&"000") OR (expB_in = x"FF" AND fracB_in = x"00000"&"000"))  OR
+						((expA_in = x"00" AND fracA_in = x"00000"&"000") OR (expB_in = x"00" AND fracB_in = x"00000"&"000")) else
+
 
 	sA_in&'1';
 
