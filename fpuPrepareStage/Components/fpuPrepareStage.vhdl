@@ -39,7 +39,7 @@ ARCHITECTURE prepare_vectors OF fpuPrepareStage IS
        						((expA_in = x"00" AND fracA_in = x"00000"&"000") AND (expB_in = x"FF" AND fracB_in = x"00000"&"000")) else
 
 
-	sA_in XOR sB_in&'1';
+	sA_in&'1';
 
     mult_expZ <= x"FF"&'0'   		when   	(expA_in = x"FF" AND fracA_in /= x"00000"&"000") OR 
        			   			(expB_in = x"FF" AND fracB_in /= x"00000"&"000") OR
@@ -104,9 +104,9 @@ ARCHITECTURE prepare_vectors OF fpuPrepareStage IS
 
 
    -- Checks enable flag to see if it has been toggled
-   en <= '0'			when (add_sub_mult(1) = '1' AND (mult_sZ(0) = '0' OR mult_expZ(0) = '0' OR mult_fracZ(0) = '0')) else
+   en <= '0'			when (add_sub_mult(1) = '0' AND (mult_sZ(0) = '0' OR mult_expZ(0) = '0' OR mult_fracZ(0) = '0')) else
 
-	'0'			when (add_sub_mult(1) = '0' AND (add_sZ(0) = '0' OR add_expZ(0) = '0' OR add_fracZ(0) = '0'))	else
+	'0'			when (add_sub_mult(0) = '0' AND (add_sZ(0) = '0' OR add_expZ(0) = '0' OR add_fracZ(0) = '0'))	else
 
 	'1';
 
