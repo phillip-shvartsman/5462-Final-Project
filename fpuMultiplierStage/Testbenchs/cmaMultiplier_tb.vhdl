@@ -22,12 +22,13 @@ ARCHITECTURE test OF cmaMultiplier_tb IS
   
   FOR ALL : cmaMultiplier USE ENTITY WORK.cmaMultiplier(dataflow);
   
-  SIGNAL inputL,inputR  : std_logic_vector(23 downto 0) := (others => '0');
-  SIGNAL output         : std_logic_vector(47 downto 0) := (others => '0');
+  SIGNAL inputL,inputR    : std_logic_vector(23 downto 0) := (others => '0');
+  SIGNAL output,expected  : std_logic_vector(47 downto 0) := (others => '0');
   
 BEGIN
-  inputL <= x"000003" after 5 ns;
-  inputR <= x"000030" after 10 ns, x"000000" after 20 ns;
+  inputL <= x"BC9931" after 5 ns;
+  inputR <= x"C95D31" after 10 ns, x"000000" after 20 ns;
+  expected <= x"9458EF391F61";
   
   Mult : cmaMultiplier PORT MAP
     ( inputL, inputR,

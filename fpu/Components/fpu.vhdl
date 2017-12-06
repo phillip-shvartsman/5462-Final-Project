@@ -19,11 +19,11 @@ END fpu;
 
 ARCHITECTURE dataflow OF fpu IS
   COMPONENT fpuPrepareStage IS
-    PORT( Ain,Bin     : IN std_logic_vector(31 downto 0);
-          ASM      			: IN std_logic_vector(1 downto 0);
-          sA, sB, EN  : OUT std_logic;
-          expA, expB  : OUT std_logic_vector(7 downto 0);
-  	       manA, manB  : OUT std_logic_vector(23 downto 0)
+    PORT( Ain,Bin       : IN std_logic_vector(31 downto 0);
+          add_sub_mult  : IN std_logic_vector(1 downto 0);
+          sA, sB, EN    : OUT std_logic;
+          expA, expB    : OUT std_logic_vector(7 downto 0);
+  	       manA, manB    : OUT std_logic_vector(23 downto 0)
   	     );
   END COMPONENT;
 
@@ -64,7 +64,7 @@ ARCHITECTURE dataflow OF fpu IS
   	     );
   END COMPONENT;
   
-  FOR ALL : fpuPrepareStage     USE ENTITY WORK.fpuPrepareStage(prep_AB);
+  FOR ALL : fpuPrepareStage     USE ENTITY WORK.fpuPrepareStage(prepare_vectors);
   FOR ALL : fpuAdderStage       USE ENTITY WORK.fpuAdderStage(dataflow);
   FOR ALL : fpuMultiplierStage  USE ENTITY WORK.fpuMultiplierStage(design);
   FOR ALL : renormalizer        USE ENTITY WORK.renormalizer(behave);

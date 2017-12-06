@@ -10,16 +10,16 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-ENTITY cma25bits IS
-  PORT  ( A,B   : IN  std_logic_vector(24 downto 0);
+ENTITY cma26bits IS
+  PORT  ( A,B   : IN  std_logic_vector(25 downto 0);
           cin   : IN  std_logic;
-          sum   : OUT std_logic_vector(24 downto 0);
+          sum   : OUT std_logic_vector(25 downto 0);
           cout  : OUT std_logic
         );
-END cma25bits;
+END cma26bits;
 
 --WARNING : INCOMPLETE DUE TO NOT ALLOWING FOR GENERIC INPUTS, CAN ONLY ACCEPT INPUTS OF CERTAIN SIZE
-ARCHITECTURE dataflow OF cma25bits IS
+ARCHITECTURE dataflow OF cma26bits IS
   COMPONENT cmaStage IS
     GENERIC ( Init  : Integer
             );
@@ -48,44 +48,48 @@ BEGIN
   
   GEN_STAGES : FOR i IN 0 to carry'HIGH-1 GENERATE
     
+    --Stage for first 3 bits (2-0)
     STAGE1 : IF i = 0 GENERATE
       ripple0 : rippleadder PORT MAP
-        ( A(3 downto 0), B(3 downto 0),
+        ( A(2 downto 0), B(2 downto 0),
           carry(i),
-          sum(3 downto 0),
+          sum(2 downto 0),
           carry(i+1)
         );
     END GENERATE STAGE1;
     
+    --Stage for next 5 bits (7-3)
     STAGE2 : IF i = 1 GENERATE
       cmaStage2 : cmaStage
-      GENERIC MAP ( Init => 3 )
-      PORT MAP  ( A(10 downto 4), B(10 downto 4),
+      GENERIC MAP ( Init => 2 )
+      PORT MAP  ( A(7 downto 3), B(7 downto 3),
                   carry(i),
-                  sum(10 downto 4),
+                  sum(7 downto 3),
                   carry(i+1)
                 );
     END GENERATE STAGE2;
     
+    --Stage for next 9 bits (16-8)
     STAGE3 : IF i = 2 GENERATE
       cmaStage3 : cmaStage
-        GENERIC MAP ( Init => 3 )
-        PORT MAP  ( A(17 downto 11), B(17 downto 11),
+        GENERIC MAP ( Init => 2 )
+        PORT MAP  ( A(16 downto 8), B(16 downto 8),
                     carry(i),
-                    sum(17 downto 11),
+                    sum(16 downto 8),
                     carry(i+1)
                   );
     END GENERATE STAGE3;
     
     STAGE4 : IF i = 3 GENERATE
       cmaStage4 : cmaStage
-        GENERIC MAP ( Init => 3 )
-        PORT MAP  ( A(24 downto 18), B(24 downto 18),
+        GENERIC MAP ( Init => 2 )
+        PORT MAP  ( A(25 downto 17), B(25 downto 17),
                     carry(i),
-                    sum(24 downto 18),
+                    sum(25 downto 17),
                     carry(i+1)
                   );
     END GENERATE STAGE4;
+    
   END GENERATE GEN_STAGES;
   
   cout  <=  carry(carry'HIGH);

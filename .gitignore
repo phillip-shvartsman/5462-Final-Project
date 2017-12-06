@@ -4,4 +4,7 @@
 *.ini
 *.wlf
 *.opt
+transcript
 /work/*
+.directory
+*~

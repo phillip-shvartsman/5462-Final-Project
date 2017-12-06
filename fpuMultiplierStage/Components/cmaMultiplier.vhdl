@@ -27,7 +27,7 @@ ARCHITECTURE dataflow OF cmaMultiplier IS
   
   FOR ALL : cma48bits USE ENTITY WORK.cma48bits(dataflow);
   
-  TYPE matrix IS ARRAY (inputR'HIGH+1 downto 0) OF STD_LOGIC_VECTOR(inputL'LENGTH+inputR'LENGTH-1 downto 0);
+  TYPE matrix IS ARRAY (inputR'HIGH+1 downto 0) OF STD_LOGIC_VECTOR(output'HIGH downto 0);
   SIGNAL product  : matrix;
   SIGNAL shiftin  : matrix;
   SIGNAL interA   : matrix;
@@ -44,7 +44,7 @@ BEGIN
         open
       );
       
-    shiftin(i+1) <= shiftin(i)(inputL'LENGTH+inputR'LENGTH-2 downto 0) & '0';
+    shiftin(i+1) <= shiftin(i)(output'HIGH-1 downto 0) & '0';
     
     product(i+1) <= interA(i) when (inputR(i) = '1') else
                     product(i);

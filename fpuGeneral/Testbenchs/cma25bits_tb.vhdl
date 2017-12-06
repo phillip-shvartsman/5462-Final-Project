@@ -31,8 +31,8 @@ ARCHITECTURE test OF cma25bits_tb IS
   
 BEGIN
   
-  A <= x"FFFFFF" & '1' after 5 ns, x"000C00" & '1' after 12 ns;
-  B <= x"000100" & '1' after 10 ns;
+  A <= "0101001100100111100001011" after 5 ns, x"000C00" & '1' after 12 ns;
+  B <= "1111111110011000100101011" after 10 ns;
   cin <= '1' after 7 ns;
   cma1 : cma25bits PORT MAP
     (A,B,cin,sum,cout);
