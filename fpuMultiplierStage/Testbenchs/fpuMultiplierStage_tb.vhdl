@@ -1,23 +1,25 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-ENTITY multiplierStage_tb IS
-END multiplierStage_tb;
+ENTITY fpuMultiplierStage_tb IS
+END fpuMultiplierStage_tb;
 
-USE WORK.multiplierStage_test_vect.all;
-ARCHITECTURE test OF multiplierStage_tb IS
-  COMPONENT multiplierStage IS
-    PORT(MAN_A, MAN_B: INOUT STD_LOGIC_VECTOR(23 DOWNTO 0);
-	     EXP_A, EXP_B: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-    	 EN: IN STD_LOGIC; 
-    	 oper: IN STD_LOGIC_VECTOR(1 DOWNTO 0);    	 
-    	 S_A, S_B: IN STD_LOGIC;
-	     MAN_Z: OUT STD_LOGIC_VECTOR(47 DOWNTO 0);
-	     EXP_Z: OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
- 	     S_Z, MSB_A, MSB_B: OUT STD_LOGIC);
+USE WORK.fpuMultiplierStage_test_vect.all;
+ARCHITECTURE test OF fpuMultiplierStage_tb IS
+  COMPONENT fpuMultiplierStage IS
+    PORT(S_A, S_B      : IN  STD_LOGIC;
+	       EXP_A, EXP_B  : IN  STD_LOGIC_VECTOR(7 DOWNTO 0);
+	       MAN_A, MAN_B  : IN  STD_LOGIC_VECTOR(23 DOWNTO 0);
+	       EN            : IN  STD_LOGIC;
+	       oper          : IN  STD_LOGIC_VECTOR(1 DOWNTO 0);
+	       S_Z           : OUT STD_LOGIC;
+	       EXP_Z         : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	       MAN_Z         : OUT STD_LOGIC_VECTOR(47 DOWNTO 0);
+ 	       MSB_A, MSB_B  : OUT STD_LOGIC
+ 	      );
   END COMPONENT;
   
-  FOR ALL : multiplierStage USE ENTITY  WORK.multiplierStage(design);
+  FOR ALL : fpuMultiplierStage USE ENTITY  WORK.fpuMultiplierStage(design);
   
   SIGNAL  S_A,S_B : std_logic := '0';
   SIGNAL  EXP_A,EXP_B   : std_logic_vector(7 downto 0)  := (others => '0');
@@ -36,17 +38,16 @@ ARCHITECTURE test OF multiplierStage_tb IS
   SIGNAL  err_sig         : std_logic;
   
 BEGIN
-  multiplier : multiplierStage PORT MAP
+  multiplier : fpuMultiplierStage PORT MAP
     ( S_A, S_B,
       EXP_A, EXP_B,
       MAN_A, MAN_B,
-      oper,
       EN,
+      oper,
       S_Z,
       EXP_Z,
       MAN_Z,
-      MSB_A,MSB_B,
-      --En_out
+      MSB_A,MSB_B
     );
   
   gen_vec ( S_A, S_B,

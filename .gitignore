@@ -4,4 +4,5 @@
 *.ini
 *.wlf
 *.opt
+transcript
 /work/*
