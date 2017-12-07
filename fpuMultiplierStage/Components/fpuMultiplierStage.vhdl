@@ -38,22 +38,28 @@ ARCHITECTURE design OF fpuMultiplierStage IS
 	
 	-- Internal Signals
 	SIGNAL C_OUT : STD_LOGIC := '0';
+	SIGNAL expA : STD_LOGIC_VECTOR (7 downto 0);
+	SIGNAL expB : STD_LOGIC_VECTOR (7 downto 0);
 	SIGNAL expAtemp : STD_LOGIC_VECTOR (7 downto 0);
 	SIGNAL expZtemp : STD_LOGIC_VECTOR (7 downto 0);
 	SIGNAL manZtemp : STD_LOGIC_VECTOR (47 downto 0);
 	
 BEGIN
--- Handle sign bit
-		S_Z <= S_A when EN='0' else
-			   (S_A XOR S_B) when (oper(1)='1') else
-			   'Z';
+	-- Handle sign bit
+	S_Z <= S_A when EN='0' else
+	   (S_A XOR S_B) when (oper(1)='1') else
+	   'Z';
 		
--- Handle A'High and B'High
-		MSB_A <= EXP_A(7); 
-		MSB_B <= EXP_B(7);
+	-- Handle A'High and B'High
+	MSB_A <= EXP_A(7); 
+	MSB_B <= EXP_B(7);
 
+	 -- Handle exponent 
+	  expA <= "00000001" when EXP_A = "00000000" else
+	           EXP_A;
+	  expB <= "00000001" when EXP_B = "00000000" else
+	           EXP_B;
 
-	  -- Handle exponent 
 	  expAtemp <= (not EXP_A(7)) & EXP_A(6 downto 0);
 	  ADD_EXP: rippleadder PORT MAP(expAtemp, EXP_B, '1', expZtemp, C_OUT);
 		EXP_Z <= EXP_A when EN='0' else
